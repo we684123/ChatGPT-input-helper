@@ -288,7 +288,7 @@ function showPopup() {
 
         // 創建新增按鈕
         const addButton = document.createElement('button');
-        addButton.textContent = '新增';
+        addButton.textContent = '新增(add)';
         addButton.style.margin = '10px';
         addButton.style.border = '2px solid #ffffff';
         addButton.addEventListener('click', () => {
@@ -305,12 +305,12 @@ function showPopup() {
 
         // 創建編輯按鈕
         const editButton = document.createElement('button');
-        editButton.textContent = '編輯';
+        editButton.textContent = '編輯(edit)';
         editButton.style.margin = '10px';
         editButton.style.border = '2px solid #ffffff';
         editButton.addEventListener('click', () => {
             // 編輯一個 item
-            const index = prompt('請輸入要編輯的編號');
+            const index = prompt('請輸入要編輯的編號(edit index)');
             if (index && index >= 1 && index <= customize.length) {
                 const item = customize[index - 1];
 
@@ -360,24 +360,24 @@ function showPopup() {
 
         // 創建刪除按鈕
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = '刪除';
+        deleteButton.textContent = '刪除(delete)';
         deleteButton.style.margin = '10px';
         deleteButton.style.border = '2px solid #ffffff';
         deleteButton.addEventListener('click', () => {
             // 刪除一個 item
-            const index = prompt('請輸入要刪除的編號');
+            const index = prompt('請輸入要刪除的編號(delete index)');
             if (index && index >= 1 && index <= customize.length) {
                 customize.splice(index - 1, 1);
                 renderTable();
             } else {
-                alert('輸入的編號不合法');
+                alert('輸入的編號不合法 (invalid index)');
             }
         });
         popup.appendChild(deleteButton);
 
         // 創建關閉按鈕
         const closeButton = document.createElement('button');
-        closeButton.textContent = '儲存並離開';
+        closeButton.textContent = '儲存並離開(save&exit)';
         closeButton.style.position = 'absolute';
         closeButton.style.top = '5px';
         closeButton.style.right = '5px';
@@ -411,11 +411,11 @@ function showPopup() {
         const th3 = document.createElement('th');
         const th4 = document.createElement('th');
         const th5 = document.createElement('th');
-        th1.textContent = '編號';
-        th2.textContent = 'name';
-        th3.textContent = 'position';
-        th4.textContent = 'autoEnter';
-        th5.textContent = 'content';
+        th1.textContent = '編號(index)';
+        th2.textContent = '名稱(name)';
+        th3.textContent = '位置(position)';
+        th4.textContent = '自動輸入(autoEnter)？';
+        th5.textContent = '內容(content)';
         tr.appendChild(th1);
         tr.appendChild(th2);
         tr.appendChild(th3);
