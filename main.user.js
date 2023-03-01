@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         ChatGPT helper
+// @name         ChatGPT-input-helper
 // @namespace    we684123
-// @version      0.0.1
+// @version      0.0.2
 // @author       we684123
 // @description  幫助快速組織常用咒文
 // @license      MIT
@@ -26,31 +26,20 @@ let init_customize = [
         autoEnter: true, // 是否自動按下 Enter
         content: [ // 要被放入輸入框的文字
             `以下問答請使用繁體中文，並使用台灣用語。\n`,
-            `代碼請改用程式碼，"返回"改為"回傳"，"水平"改為"水準"，"質量"改為"品質"，`,
-            `"示例"改為"範例"，"博客"改為"部落格"，"數據庫"改為"資料庫"，`,
-            `"打印"改為"印出"，"默認"改為"預設"，"變量"改"變數"。\n`,
-            `以上為台灣用語的一部分。`,
-        ].join("")
-    }, {
-        name: '解釋程式碼', // 按鈕的顯示名稱
-        position: 'start', // start = 最前面 , end = 最後面
-        autoEnter: false, // 是否自動按下 Enter
-        content: [ // 要被放入輸入框的文字
-            `請解釋這段程式碼\n\n`,
-        ].join("")
-    }, {
-        name: '改善程式碼', // 按鈕的顯示名稱
-        position: 'start', // start = 最前面 , end = 最後面
-        autoEnter: false, // 是否自動按下 Enter
-        content: [ // 要被放入輸入框的文字
-            `請改善這段程式碼\n\n`,
         ].join("")
     }, {
         name: '請繼續', // 按鈕的顯示名稱
         position: 'start', // start = 最前面 , end = 最後面
-        autoEnter: false, // 是否自動按下 Enter
+        autoEnter: true, // 是否自動按下 Enter
         content: [ // 要被放入輸入框的文字
             `請繼續`,
+        ].join("")
+    }, {
+        name: '請從""繼續', // 按鈕的顯示名稱
+        position: 'start', // start = 最前面 , end = 最後面
+        autoEnter: false, // 是否自動按下 Enter
+        content: [ // 要被放入輸入框的文字
+            `請從""繼續`,
         ].join("")
     }
 ];
