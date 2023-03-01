@@ -1,9 +1,11 @@
 // ==UserScript==
 // @name         ChatGPT-input-helper
-// @namespace    we684123
+// @name:zh-TW   ChatGPT-input-helper 快速輸入常用咒文
+// @namespace    https://github.com/we684123/ChatGPT-input-helper
 // @version      0.0.2
 // @author       we684123
-// @description  幫助快速組織常用咒文
+// @description  Help organize commonly used spells quickly
+// @description:zh-TW  幫助快速組織常用咒文
 // @license      MIT
 // @icon         https://chat.openai.com/favicon.ico
 // @match        https://chat.openai.com/chat
