@@ -2,7 +2,7 @@
 // @name         ChatGPT-input-helper
 // @name:zh-TW   ChatGPT-input-helper 快速輸入常用咒文
 // @namespace    https://github.com/we684123/ChatGPT-input-helper
-// @version      0.0.2
+// @version      0.0.3
 // @author       we684123
 // @description  Help organize commonly used spells quickly
 // @description:zh-TW  幫助快速組織常用咒文
@@ -321,7 +321,7 @@ function showPopup() {
 
                 // 編輯 position
                 do {
-                    newAutoEnter = prompt('請輸入新的 AutoEnter (只能輸入 y 或 n)', item.autoEnter);
+                    newAutoEnter = prompt('請輸入新的 AutoEnter (只能輸入 y 或 n)', item.autoEnter ? 'y':'n');
                 } while (newAutoEnter !== null && newAutoEnter !== 'y' && newAutoEnter !== 'n');
                 if (newAutoEnter !== null) {
                     if (newAutoEnter === 'y') {
