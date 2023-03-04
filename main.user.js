@@ -21,7 +21,37 @@
 let customize
 
 // 定義初始化咒文
-let init_customize = [
+let init_customize = {
+    'en': [{
+            name: 'please continue', // 按鈕的顯示名稱
+            position: 'start', // start = 最前面 , end = 最後面
+            autoEnter: true, // 是否自動按下 Enter
+            content: [ // 要被放入輸入框的文字
+                `please continue`,
+            ].join("")
+        }
+    ],
+    'zh-TW': [
+        {
+            name: '繁體中文初始化', // 按鈕的顯示名稱
+            position: 'start', // start = 最前面 , end = 最後面
+            autoEnter: true, // 是否自動按下 Enter
+            content: [ // 要被放入輸入框的文字
+                `以下問答請使用繁體中文，並使用台灣用語。\n`,
+            ].join("")
+        }, {
+            name: '請繼續', // 按鈕的顯示名稱
+            position: 'start', // start = 最前面 , end = 最後面
+            autoEnter: true, // 是否自動按下 Enter
+            content: [ // 要被放入輸入框的文字
+                `請繼續`,
+            ].join("")
+        }
+    ]
+}
+
+
+[
     {
         name: '繁體中文初始化', // 按鈕的顯示名稱
         position: 'start', // start = 最前面 , end = 最後面
@@ -36,15 +66,22 @@ let init_customize = [
         content: [ // 要被放入輸入框的文字
             `請繼續`,
         ].join("")
-    }, {
-        name: '請從""繼續', // 按鈕的顯示名稱
-        position: 'start', // start = 最前面 , end = 最後面
-        autoEnter: false, // 是否自動按下 Enter
-        content: [ // 要被放入輸入框的文字
-            `請從""繼續`,
-        ].join("")
     }
-];
+]
+
+// 語言設定
+const translations = {
+    'en': {
+        'greeting': 'Hello, world!',
+        'button': 'Click me'
+    },
+    'zh-TW': {
+        'greeting': '你好，世界！',
+        'button': '點擊我'
+    }
+};
+
+
 
 // 定義雜七雜八
 const HELPER_MENU_TEST = 'input helper'; // 按鈕文字
@@ -61,6 +98,13 @@ const INPUT_EVENT = new Event('input', { bubbles: true }); // 模擬輸入於輸
 
 
 // 準備 function 
+
+// 學Djano的翻譯方式
+function _(language) {
+    return translations[language];
+}
+
+
 const insertCustomize = (customize, name) => {
     // customize = 設定的object
     // name = 觸發按鈕的名稱
@@ -462,6 +506,8 @@ function showPopup() {
 }
 
 
+
+
 // // 失敗的監控(((
 // // 現在只能用 setInterval + setTimeout 去添加按鈕
 // const observeElementChanges = (trigger, selector, callback) => {
@@ -484,48 +530,62 @@ function showPopup() {
 //     observer.observe(triggerNode, { childList: true });
 // };
 
+
+
+
 const main = () => {
-    const container = document.getElementById('helper_menu');
+    // 初始化
+    const language = GM_getValue('language', navigator.language);
+    if (language == 'zh-TW') {
+        customize = init_customize;
+    } else {
+        customize = init_customize_en;
+    }
+
     let GM_customize = GM_getValue('customizeData', customize); // 讀取 customize 數據
     if (GM_customize) {
         customize = GM_customize;
     } else {
-        customize = init_customize;
-        GM_setValue('customizeData', customize);
-    }
+        if (navigator.language == 'zh-TW') {
 
-    //找不到就新增
-    if (!container) {
-        const aimsNode = document.querySelector(NAV_MENU);
-        // 新增一個容器
-        const container = document.createElement('div');
-        container.classList.add(CONTAINER_CLASS);
-        container.id = 'helper_menu';
-        container.style.width = `${aimsNode.offsetWidth}px`; // 設定 container 寬度為父元素寬度
+        } else {
+            customize = init_customize;
+            GM_setValue('customizeData', customize);
+        }
 
-        // 將容器元素插入到目標元素後面
-        aimsNode.parentNode.insertBefore(container, aimsNode.nextSibling);
+        //找不到就新增
+        const container = document.getElementById('helper_menu');
+        if (!container) {
+            const aimsNode = document.querySelector(NAV_MENU);
+            // 新增一個容器
+            const container = document.createElement('div');
+            container.classList.add(CONTAINER_CLASS);
+            container.id = 'helper_menu';
+            container.style.width = `${aimsNode.offsetWidth}px`; // 設定 container 寬度為父元素寬度
 
-        // 新增一個按鈕元素
-        addButton(container, customize, HELPER_MENU_TEST);
+            // 將容器元素插入到目標元素後面
+            aimsNode.parentNode.insertBefore(container, aimsNode.nextSibling);
 
-        showPopup()
-    }
-};
+            // 新增一個按鈕元素
+            addButton(container, customize, HELPER_MENU_TEST);
 
-const checkUrl = () => {
-    if (window.location.href !== checkUrl.currentUrl) {
-        console.log(`網址變更為 ${window.location.href}`);
+            showPopup()
+        }
+    };
+
+    const checkUrl = () => {
+        if (window.location.href !== checkUrl.currentUrl) {
+            console.log(`網址變更為 ${window.location.href}`);
+            checkUrl.currentUrl = window.location.href;
+            setTimeout(main, 100);
+        }
+    };
+
+    (() => {
+        // 妥協的結果，用 setInterval + setTimeout 去添加按鈕
+        // 之後一定要改好！！！
         checkUrl.currentUrl = window.location.href;
-        setTimeout(main, 100);
-    }
-};
-
-(() => {
-    // 妥協的結果，用 setInterval + setTimeout 去添加按鈕
-    // 之後一定要改好！！！
-    checkUrl.currentUrl = window.location.href;
-    setInterval(checkUrl, 1000);
-    setTimeout(main, 2000);
-    // GM_deleteValue('customizeData');
-})();
+        setInterval(checkUrl, 1000);
+        setTimeout(main, 2000);
+        // GM_deleteValue('customizeData');
+    })();
