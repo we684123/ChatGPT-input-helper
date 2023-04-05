@@ -10,6 +10,7 @@
 // @icon         https://chat.openai.com/favicon.ico
 // @match        https://chat.openai.com/chat
 // @match        https://chat.openai.com/chat/*
+// @match        https://chat.openai.com/chat?*
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_deleteValue
@@ -60,7 +61,7 @@ const SUBMIT_BUTTON_POSITION = 'button.absolute'; // 送出按鈕的定位
 const INPUT_EVENT = new Event('input', { bubbles: true }); // 模擬輸入於輸入框的事件
 
 
-// 準備 function 
+// 準備 function
 const insertCustomize = (customize, name) => {
     // customize = 設定的object
     // name = 觸發按鈕的名稱
@@ -321,7 +322,7 @@ function showPopup() {
 
                 // 編輯 position
                 do {
-                    newAutoEnter = prompt('請輸入新的 AutoEnter (只能輸入 y 或 n)', item.autoEnter ? 'y':'n');
+                    newAutoEnter = prompt('請輸入新的 AutoEnter (只能輸入 y 或 n)', item.autoEnter);
                 } while (newAutoEnter !== null && newAutoEnter !== 'y' && newAutoEnter !== 'n');
                 if (newAutoEnter !== null) {
                     if (newAutoEnter === 'y') {
