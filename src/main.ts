@@ -1,4 +1,4 @@
-import sentinel from "./libs/sentinel";
+import sentinel from "./utils/sentinel";
 import { onloadSafe } from "./utils/utils";
 import "./style.css";
 
