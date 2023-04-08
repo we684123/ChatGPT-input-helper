@@ -1,13 +1,19 @@
-// main.ts
-import { addElementToPage } from "./library";
+import sentinel from "./libs/sentinel";
+import { onloadSafe } from "./utils/utils";
 import "./style.css";
 
-const customElement = document.createElement("div");
-customElement.className = "custom-element";
-customElement.innerText = "這是新增的自訂元素";
+main();
 
-// 加入元素到指定位置
-addElementToPage(
-  "nav > div.overflow-y-auto",
-  customElement
-);
+function main() {
+  // 頁面載入完成後執行
+  onloadSafe(() => {
+    // 監聽 nav 元素
+    console.log("=====監聽 nav 元素=====");
+
+    sentinel.on("nav", (nav: any) => {
+      console.log("===== sentinel.on nav =====");
+      console.log("nav", nav);
+      console.log("nav12321312");
+    });
+  });
+}
