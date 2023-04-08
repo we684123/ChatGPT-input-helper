@@ -62,10 +62,10 @@
               const selectors = isArray(cssSelectors) ? cssSelectors : [cssSelectors];
               selectors.forEach((selector) => {
                   // 獲取或創建動畫 ID。
-                  let animId = selectorToAnimationMap[selector];
-                  if (!animId) {
+                  let animIds = selectorToAnimationMap[selector];
+                  if (!animIds) {
                       const isCustomName = selector[0] == "!";
-                      selectorToAnimationMap[selector] = animId = isCustomName
+                      const animId = isCustomName
                           ? selector.slice(1)
                           : "sentinel-" + Math.random().toString(16).slice(2);
                       // 創建新的 keyframes 規則。
@@ -75,17 +75,17 @@
                       keyframeRule._id = selector;
                       // 如果選擇器不是自定義名稱，則為其創建對應的CSS 規則。
                       if (!isCustomName) {
-                          const selectorRule = cssRules[styleSheet.insertRule(selector +
-                              "{animation-duration:0.0001s;animation-name:" +
-                              animId +
-                              ";}", cssRules.length)];
+                          const selectorRule = cssRules[styleSheet.insertRule(selector + "{animation-duration:0.0001s;animation-name:" + animId + ";}", cssRules.length)];
                           selectorRule._id = selector;
                       }
-                      selectorToAnimationMap[selector] = animId;
+                      animIds = [animId];
+                      selectorToAnimationMap[selector] = animIds;
                   }
-                  // 將回調函數添加到動畫回調列表中。
-                  animationCallbacks[animId] = animationCallbacks[animId] || [];
-                  animationCallbacks[animId].push(callback);
+                  // 遍歷動畫 ID，將回調函數添加到動畫回調列表中。
+                  animIds.forEach((animId) => {
+                      animationCallbacks[animId] = animationCallbacks[animId] || [];
+                      animationCallbacks[animId].push(callback);
+                  });
               });
           },
           // `off` 方法用於移除 CSS 選擇器的監聽器。
@@ -96,39 +96,41 @@
               const selectors = isArray(cssSelectors) ? cssSelectors : [cssSelectors];
               // 遍歷選擇器，移除對應的監聽器。
               selectors.forEach((selector) => {
-                  const animId = selectorToAnimationMap[selector];
-                  if (!animId)
+                  const animIds = selectorToAnimationMap[selector];
+                  if (!animIds)
                       return;
-                  const callbacks = animationCallbacks[animId];
-                  if (!callbacks)
-                      return;
-                  // 如果提供了回調函數，則僅移除與之匹配的監聽器。
-                  if (callback) {
-                      const index = callbacks.indexOf(callback);
-                      if (index !== -1) {
-                          callbacks.splice(index, 1);
-                      }
-                  }
-                  else {
-                      delete animationCallbacks[animId];
-                  }
-                  // 如果該選擇器沒有任何回調函數，則從選擇器映射和 CSS 規則中移除它。
-                  if (callbacks.length === 0) {
-                      delete selectorToAnimationMap[selector];
-                      const rulesToDelete = [];
-                      for (let i = 0, len = cssRules.length; i < len; i++) {
-                          const rule = cssRules[i];
-                          if (rule._id === selector) {
-                              rulesToDelete.push(rule);
-                          }
-                      }
-                      rulesToDelete.forEach((rule) => {
-                          const index = Array.prototype.indexOf.call(cssRules, rule);
+                  animIds.forEach((animId) => {
+                      const callbacks = animationCallbacks[animId];
+                      if (!callbacks)
+                          return;
+                      // 如果提供了回調函數，則僅移除與之匹配的監聽器。
+                      if (callback) {
+                          const index = callbacks.indexOf(callback);
                           if (index !== -1) {
-                              styleSheet.deleteRule(index);
+                              callbacks.splice(index, 1);
                           }
-                      });
-                  }
+                      }
+                      else {
+                          delete animationCallbacks[animId];
+                      }
+                      // 如果該選擇器沒有任何回調函數，則從選擇器映射和 CSS 規則中移除它。
+                      if (callbacks.length === 0) {
+                          delete selectorToAnimationMap[selector];
+                          const rulesToDelete = [];
+                          for (let i = 0, len = cssRules.length; i < len; i++) {
+                              const rule = cssRules[i];
+                              if (rule._id === selector) {
+                                  rulesToDelete.push(rule);
+                              }
+                          }
+                          rulesToDelete.forEach((rule) => {
+                              const index = Array.prototype.indexOf.call(cssRules, rule);
+                              if (index !== -1) {
+                                  styleSheet.deleteRule(index);
+                              }
+                          });
+                      }
+                  });
               });
           }
       };
@@ -180,9 +182,14 @@
           // 監聽 nav 元素
           console.log("=====監聽 nav 元素=====");
           sentinel.on("nav", (nav) => {
-              console.log("===== sentinel.on nav =====");
+              console.log("===== sentinel.on nav 1111=====");
               console.log("nav", nav);
-              console.log("nav12321312");
+              console.log("nav11111");
+          });
+          sentinel.on("nav", (nav) => {
+              console.log("===== sentinel.on nav 2222=====");
+              console.log("nav", nav);
+              console.log("nav22222");
           });
       });
   }

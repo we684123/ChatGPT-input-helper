@@ -11,9 +11,14 @@ function main() {
     console.log("=====監聽 nav 元素=====");
 
     sentinel.on("nav", (nav: any) => {
-      console.log("===== sentinel.on nav =====");
+      console.log("===== sentinel.on nav 1111=====");
       console.log("nav", nav);
-      console.log("nav12321312");
+      console.log("nav11111");
+    });
+    sentinel.on("nav", (nav: any) => {
+      console.log("===== sentinel.on nav 2222=====");
+      console.log("nav", nav);
+      console.log("nav22222");
     });
   });
 }

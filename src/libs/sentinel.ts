@@ -1,7 +1,7 @@
 // 原程式碼：https://github.com/muicss/sentineljs
 // 改成 TypeScript 版本
 // 然後套用 [chatgpt-exporter](https://github.com/pionxzh/chatgpt-exporter) 的修改
-
+// 再把監控同一個元素時會覆蓋前一個事件的問題修掉
 declare global {
   interface CSSRule {
     _id?: string;
@@ -11,7 +11,7 @@ declare global {
 const sentinel = (() => {
   const isArray = Array.isArray;
 
-  let selectorToAnimationMap: { [key: string]: string } = {};
+  let selectorToAnimationMap: { [key: string]: string[] } = {};
   let animationCallbacks: {
     [key: string]: Array<(target: HTMLElement) => void>;
   } = {};
@@ -64,12 +64,12 @@ const sentinel = (() => {
 
       selectors.forEach((selector) => {
         // 獲取或創建動畫 ID。
-        let animId = selectorToAnimationMap[selector];
+        let animIds = selectorToAnimationMap[selector];
 
-        if (!animId) {
+        if (!animIds) {
           const isCustomName = selector[0] == "!";
 
-          selectorToAnimationMap[selector] = animId = isCustomName
+          const animId = isCustomName
             ? selector.slice(1)
             : "sentinel-" + Math.random().toString(16).slice(2);
 
@@ -88,23 +88,18 @@ const sentinel = (() => {
           // 如果選擇器不是自定義名稱，則為其創建對應的CSS 規則。
           if (!isCustomName) {
             const selectorRule =
-              cssRules![
-              styleSheet!.insertRule(
-                selector +
-                "{animation-duration:0.0001s;animation-name:" +
-                animId +
-                ";}",
-                cssRules!.length
-              )
-              ];
+              cssRules![styleSheet!.insertRule(selector + "{animation-duration:0.0001s;animation-name:" + animId + ";}", cssRules!.length)];
             selectorRule._id = selector;
           }
-          selectorToAnimationMap[selector] = animId;
+          animIds = [animId];
+          selectorToAnimationMap[selector] = animIds;
         }
 
-        // 將回調函數添加到動畫回調列表中。
-        animationCallbacks[animId] = animationCallbacks[animId] || [];
-        animationCallbacks[animId].push(callback);
+        // 遍歷動畫 ID，將回調函數添加到動畫回調列表中。
+        animIds.forEach((animId) => {
+          animationCallbacks[animId] = animationCallbacks[animId] || [];
+          animationCallbacks[animId].push(callback);
+        });
       });
     },
 
@@ -120,43 +115,46 @@ const sentinel = (() => {
 
       // 遍歷選擇器，移除對應的監聽器。
       selectors.forEach((selector) => {
-        const animId = selectorToAnimationMap[selector];
-        if (!animId) return;
+        const animIds = selectorToAnimationMap[selector];
+        if (!animIds) return;
 
-        const callbacks = animationCallbacks[animId];
-        if (!callbacks) return;
+        animIds.forEach((animId) => {
+          const callbacks = animationCallbacks[animId];
+          if (!callbacks) return;
 
-        // 如果提供了回調函數，則僅移除與之匹配的監聽器。
-        if (callback) {
-          const index = callbacks.indexOf(callback);
-          if (index !== -1) {
-            callbacks.splice(index, 1);
-          }
-        } else {
-          delete animationCallbacks[animId];
-        }
-
-        // 如果該選擇器沒有任何回調函數，則從選擇器映射和 CSS 規則中移除它。
-        if (callbacks.length === 0) {
-          delete selectorToAnimationMap[selector];
-          const rulesToDelete: CSSRule[] = [];
-          for (let i = 0, len = cssRules!.length; i < len; i++) {
-            const rule = cssRules![i];
-            if (rule._id === selector) {
-              rulesToDelete.push(rule);
-            }
-          }
-
-          rulesToDelete.forEach((rule) => {
-            const index = Array.prototype.indexOf.call(cssRules, rule);
+          // 如果提供了回調函數，則僅移除與之匹配的監聽器。
+          if (callback) {
+            const index = callbacks.indexOf(callback);
             if (index !== -1) {
-              styleSheet!.deleteRule(index);
+              callbacks.splice(index, 1);
             }
-          });
-        }
+          } else {
+            delete animationCallbacks[animId];
+          }
+
+          // 如果該選擇器沒有任何回調函數，則從選擇器映射和 CSS 規則中移除它。
+          if (callbacks.length === 0) {
+            delete selectorToAnimationMap[selector];
+            const rulesToDelete: CSSRule[] = [];
+            for (let i = 0, len = cssRules!.length; i < len; i++) {
+              const rule = cssRules![i];
+              if (rule._id === selector) {
+                rulesToDelete.push(rule);
+              }
+            }
+
+            rulesToDelete.forEach((rule) => {
+              const index = Array.prototype.indexOf.call(cssRules, rule);
+              if (index !== -1) {
+                styleSheet!.deleteRule(index);
+              }
+            });
+          }
+        });
       });
     }
   };
+
 })();
 
-export default sentinel;
+export default sentinel;    
