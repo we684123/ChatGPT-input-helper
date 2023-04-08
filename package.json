@@ -1,8 +1,9 @@
 {
   "name": "my-project",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "build": "rollup -c && node post-build.js",
+    "build": "rollup -c && node post-build.cjs",
     "format": "prettier --write \"src/**/*.{ts,css,js,json}\""
   },
   "devDependencies": {
