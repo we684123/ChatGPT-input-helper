@@ -1,6 +1,9 @@
 import sentinel from "./utils/sentinel";
 import { onloadSafe } from "./utils/utils";
 
+import { addMenuBtn } from "./libs/addMenuBtn";
+import { showPopup } from "./libs/showPopup";
+
 import { config } from "./config";
 import "./style.css";
 
