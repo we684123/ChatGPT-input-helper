@@ -24,6 +24,7 @@
     "url": "https://github.com/we684123/json-hook/issues"
   },
   "dependencies": {
+    "clipboardy": "^3.0.0",
     "sentinel-js": "^0.0.5"
   }
 }
