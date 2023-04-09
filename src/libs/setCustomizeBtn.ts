@@ -1,3 +1,5 @@
+import { createFormPopup } from './createFormPopup';
+
 export function setCustomizeBtn(customize: any) {
     // 找到 settingButton 元素
     const settingButton = document.getElementById('settingButton') as HTMLElement;
@@ -26,15 +28,18 @@ export function setCustomizeBtn(customize: any) {
         addButton.textContent = '新增(add)';
         addButton.style.margin = '10px';
         addButton.style.border = '2px solid #ffffff';
+        // 當點擊 addButton 時觸發事件
         addButton.addEventListener('click', () => {
-            // 新增一個 item
-            const newItem = {
-                name: '',
-                position: '',
-                content: ''
-            };
-            customize.push(newItem);
-            renderTable();
+            createFormPopup('新增 Item', (values: any) => {
+                const newItem = {
+                    name: values.name,
+                    position: values.position,
+                    autoEnter: values.autoEnter,
+                    content: values.content,
+                };
+                customize.push(newItem);
+                renderTable();
+            });
         });
         popup.appendChild(addButton);
 
