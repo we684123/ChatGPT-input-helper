@@ -1,0 +1,61 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #fff;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mainButton {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: #202123;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 85%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.settingButton {
+  padding: 8px 14px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #202123;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 15%;
+  box-sizing: border-box;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  left: 100px;
+  /* top: 0; */
+  z-index: 1;
+  width: 100%;
+  background-color: #202123;
+  border: 1px solid #fff;
+  border-radius: 15px;
+}
+
+.menuButton {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #202123;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
