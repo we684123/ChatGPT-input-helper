@@ -335,13 +335,13 @@
   styleInject(css_248z$1);
 
   // createFormPopup.ts
-  function createFormPopup(title, submitCallback) {
+  function createFormPopup(options) {
       // 創建彈出視窗
       const formPopup = document.createElement('div');
       formPopup.className = styles['form-popup'];
       // 創建標題
       const titleLabel = document.createElement('h2');
-      titleLabel.textContent = title;
+      titleLabel.textContent = options.title;
       formPopup.appendChild(titleLabel);
       // 創建表單
       const form = document.createElement('form');
@@ -389,6 +389,13 @@
       submitButton.type = 'submit';
       submitButton.textContent = '提交';
       form.appendChild(submitButton);
+      // 根據編輯模式，填充初始值
+      if (options.mode === 'edit' && options.initialValues) {
+          nameInput.value = options.initialValues.name;
+          positionSelect.value = options.initialValues.position;
+          autoEnterInput.checked = options.initialValues.autoEnter;
+          contentTextarea.value = options.initialValues.content;
+      }
       // 提交表單時的處理
       form.addEventListener('submit', (event) => {
           event.preventDefault();
@@ -399,7 +406,7 @@
               content: contentTextarea.value,
           };
           console.log('values', values);
-          submitCallback(values);
+          options.onSubmit(values);
           document.body.removeChild(formPopup);
       });
       // 點擊彈窗外的地方關閉彈窗
@@ -415,8 +422,6 @@
   function setCustomizeBtn(customize) {
       // 找到 settingButton 元素
       const settingButton = document.getElementById('settingButton');
-      let newPosition;
-      let newAutoEnter;
       // 當點擊 settingButton 時觸發事件
       settingButton.addEventListener('click', () => {
           // 創建彈出視窗
@@ -440,15 +445,20 @@
           addButton.style.border = '2px solid #ffffff';
           // 當點擊 addButton 時觸發事件
           addButton.addEventListener('click', () => {
-              createFormPopup('新增 Item', (values) => {
-                  const newItem = {
-                      name: values.name,
-                      position: values.position,
-                      autoEnter: values.autoEnter,
-                      content: values.content,
-                  };
-                  customize.push(newItem);
-                  renderTable();
+              // 使用 createFormPopup 函數
+              createFormPopup({
+                  title: '新增',
+                  mode: 'add',
+                  onSubmit: (values) => {
+                      const newItem = {
+                          name: values.name,
+                          position: values.position,
+                          autoEnter: values.autoEnter,
+                          content: values.content,
+                      };
+                      customize.push(newItem);
+                      renderTable();
+                  },
               });
           });
           popup.appendChild(addButton);
@@ -462,41 +472,24 @@
               const index = prompt('請輸入要編輯的編號(edit index)');
               if (index && Number(index) >= 1 && index <= customize.length) {
                   const item = customize[Number(index) - 1];
-                  // 編輯 name
-                  const newName = prompt('請輸入新的 name', item.name);
-                  if (newName !== null) {
-                      item.name = newName;
-                  }
-                  // 編輯 position
-                  do {
-                      newPosition = prompt('請輸入新的 position (只能輸入 start 或 end)', item.position);
-                  } while (newPosition !== null && newPosition !== 'start' && newPosition !== 'end');
-                  if (newPosition !== null) {
-                      item.position = newPosition;
-                  }
-                  // 編輯 position
-                  do {
-                      newAutoEnter = prompt('請輸入新的 AutoEnter (只能輸入 y 或 n)', item.autoEnter ? 'y' : 'n');
-                  } while (newAutoEnter !== null && newAutoEnter !== 'y' && newAutoEnter !== 'n');
-                  if (newAutoEnter !== null) {
-                      if (newAutoEnter === 'y') {
-                          item.autoEnter = true;
-                      }
-                      else {
-                          item.autoEnter = false;
-                      }
-                  }
-                  // 編輯 content
-                  // const textarea = document.createElement('textarea');
-                  // textarea.value = item.content;
-                  // textarea.style.width = '100%';
-                  // textarea.style.height = '100px';
-                  const newContent = prompt('請輸入新的 content', item.content);
-                  if (newContent !== null) {
-                      item.content = newContent;
-                  }
-                  // 重新渲染表格
-                  renderTable();
+                  createFormPopup({
+                      title: '編輯',
+                      mode: 'edit',
+                      initialValues: {
+                          name: item.name,
+                          position: item.position,
+                          autoEnter: item.autoEnter,
+                          content: item.content,
+                      },
+                      onSubmit: (newValues) => {
+                          item.name = newValues.name;
+                          item.position = newValues.position;
+                          item.autoEnter = newValues.autoEnter;
+                          item.content = newValues.content;
+                          // 重新渲染表格
+                          renderTable();
+                      },
+                  });
               }
               else {
                   alert('輸入的編號不合法');

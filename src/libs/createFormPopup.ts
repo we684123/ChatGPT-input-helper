@@ -1,14 +1,31 @@
 // createFormPopup.ts
 import styles from './formPopupStyles.module.css';
 
-export function createFormPopup(title: string, submitCallback: (values: any) => void) {
+interface FormPopupOptions {
+    title: string;
+    mode: 'add' | 'edit';
+    initialValues?: {
+        name: string;
+        position: string;
+        autoEnter: boolean;
+        content: string;
+    };
+    onSubmit: (values: {
+        name: string;
+        position: string;
+        autoEnter: boolean;
+        content: string;
+    }) => void;
+}
+
+export function createFormPopup(options: FormPopupOptions) {
     // 創建彈出視窗
     const formPopup = document.createElement('div');
     formPopup.className = styles['form-popup'];
 
     // 創建標題
     const titleLabel = document.createElement('h2');
-    titleLabel.textContent = title;
+    titleLabel.textContent = options.title;
     formPopup.appendChild(titleLabel);
 
     // 創建表單
@@ -63,11 +80,17 @@ export function createFormPopup(title: string, submitCallback: (values: any) => 
     submitButton.textContent = '提交';
     form.appendChild(submitButton);
 
+    // 根據編輯模式，填充初始值
+    if (options.mode === 'edit' && options.initialValues) {
+        nameInput.value = options.initialValues.name;
+        positionSelect.value = options.initialValues.position;
+        autoEnterInput.checked = options.initialValues.autoEnter;
+        contentTextarea.value = options.initialValues.content;
+    }
+
     // 提交表單時的處理
     form.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const values = {
+        event.preventDefault(); const values = {
             name: nameInput.value,
             position: positionSelect.value,
             autoEnter: autoEnterInput.checked,
@@ -75,7 +98,7 @@ export function createFormPopup(title: string, submitCallback: (values: any) => 
         };
         console.log('values', values);
 
-        submitCallback(values);
+        options.onSubmit(values);
         document.body.removeChild(formPopup);
     });
 
@@ -88,4 +111,4 @@ export function createFormPopup(title: string, submitCallback: (values: any) => 
 
     // 將彈出視窗加入頁面中
     document.body.appendChild(formPopup);
-}
+}      

@@ -30,15 +30,20 @@ export function setCustomizeBtn(customize: any) {
         addButton.style.border = '2px solid #ffffff';
         // 當點擊 addButton 時觸發事件
         addButton.addEventListener('click', () => {
-            createFormPopup('新增 Item', (values: any) => {
-                const newItem = {
-                    name: values.name,
-                    position: values.position,
-                    autoEnter: values.autoEnter,
-                    content: values.content,
-                };
-                customize.push(newItem);
-                renderTable();
+            // 使用 createFormPopup 函數
+            createFormPopup({
+                title: '新增',
+                mode: 'add',
+                onSubmit: (values) => {
+                    const newItem = {
+                        name: values.name,
+                        position: values.position,
+                        autoEnter: values.autoEnter,
+                        content: values.content,
+                    };
+                    customize.push(newItem);
+                    renderTable();
+                },
             });
         });
         popup.appendChild(addButton);
@@ -54,44 +59,25 @@ export function setCustomizeBtn(customize: any) {
             if (index && Number(index) >= 1 && index <= customize.length) {
                 const item = customize[Number(index) - 1];
 
-                // 編輯 name
-                const newName = prompt('請輸入新的 name', item.name);
-                if (newName !== null) {
-                    item.name = newName;
-                }
+                createFormPopup({
+                    title: '編輯',
+                    mode: 'edit',
+                    initialValues: {
+                        name: item.name,
+                        position: item.position,
+                        autoEnter: item.autoEnter,
+                        content: item.content,
+                    },
+                    onSubmit: (newValues) => {
+                        item.name = newValues.name;
+                        item.position = newValues.position;
+                        item.autoEnter = newValues.autoEnter;
+                        item.content = newValues.content;
 
-                // 編輯 position
-                do {
-                    newPosition = prompt('請輸入新的 position (只能輸入 start 或 end)', item.position) as string;
-                } while (newPosition !== null && newPosition !== 'start' && newPosition !== 'end');
-                if (newPosition !== null) {
-                    item.position = newPosition;
-                }
-
-                // 編輯 position
-                do {
-                    newAutoEnter = prompt('請輸入新的 AutoEnter (只能輸入 y 或 n)', item.autoEnter ? 'y' : 'n');
-                } while (newAutoEnter !== null && newAutoEnter !== 'y' && newAutoEnter !== 'n');
-                if (newAutoEnter !== null) {
-                    if (newAutoEnter === 'y') {
-                        item.autoEnter = true;
-                    } else {
-                        item.autoEnter = false;
-                    }
-                }
-
-                // 編輯 content
-                // const textarea = document.createElement('textarea');
-                // textarea.value = item.content;
-                // textarea.style.width = '100%';
-                // textarea.style.height = '100px';
-                const newContent = prompt('請輸入新的 content', item.content);
-                if (newContent !== null) {
-                    item.content = newContent;
-                }
-
-                // 重新渲染表格
-                renderTable();
+                        // 重新渲染表格
+                        renderTable();
+                    },
+                });
             } else {
                 alert('輸入的編號不合法');
             }
