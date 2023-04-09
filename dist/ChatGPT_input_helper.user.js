@@ -2,7 +2,7 @@
 // @name         ChatGPT-input-helper
 // @name:zh-TW   ChatGPT-input-helper 快速輸入常用咒文
 // @namespace    https://github.com/we684123/ChatGPT-input-helper
-// @version      0.0.5
+// @version      0.0.6
 // @author       we684123
 // @description  Help organize commonly used spells quickly
 // @description:zh-TW  幫助快速組織常用咒文
@@ -10,6 +10,7 @@
 // @icon         https://chat.openai.com/favicon.ico
 // @match        https://chat.openai.com/chat
 // @match        https://chat.openai.com/chat/*
+// @match        https://chat.openai.com/chat?*
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_deleteValue
@@ -224,7 +225,6 @@
   // 將自定義內容插入到輸入框中
   const insertCustomize = (customize, name) => {
       const textInputbox = document.querySelector(config.TEXT_INPUTBOX_POSITION);
-      const submitButton = document.querySelector(config.SUBMIT_BUTTON_POSITION);
       const item = customize.find((i) => i.name === name);
       if (item) {
           if (item.position === 'start') {
@@ -236,7 +236,10 @@
           textInputbox.dispatchEvent(config.INPUT_EVENT);
           textInputbox.focus();
           if (item.autoEnter) {
-              submitButton.click();
+              setTimeout(() => {
+                  const submitButton = document.querySelector(config.SUBMIT_BUTTON_POSITION);
+                  submitButton.click();
+              }, 100);
           }
       }
       else {
