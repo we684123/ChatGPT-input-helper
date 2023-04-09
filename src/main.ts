@@ -1,7 +1,7 @@
 import sentinel from "./utils/sentinel";
 import { onloadSafe } from "./utils/utils";
 
-import { addMenuBtn } from "./libs/addMenuBtn";
+import { addMenuBtnWrapper } from "./libs/addMenuBtn";
 import { setCustomizeBtn } from "./libs/setCustomizeBtn";
 
 import { config } from "./config";
@@ -49,8 +49,8 @@ function main() {
           aimsNode.parentNode?.insertBefore(container, aimsNode.nextSibling);
 
           // 新增一個按鈕元素
-          addMenuBtn(container, customize, config.HELPER_MENU_TEXT);
-
+          addMenuBtnWrapper(container, customize, config.HELPER_MENU_TEXT);
+          // 設定 "設定按鈕"的點擊事件
           setCustomizeBtn(customize);
         }
       }

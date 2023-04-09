@@ -20,18 +20,6 @@ export const createSettingButton = (): HTMLButtonElement => {
     return settingButton;
 };
 
-// 創建按鈕容器，用於存放主按鈕和設定按鈕
-export const createButtonContainer = (
-    mainButton: HTMLButtonElement,
-    settingButton: HTMLButtonElement
-): HTMLDivElement => {
-    const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add(config.CONTAINER_CLASS);
-
-    buttonContainer.appendChild(settingButton);
-    buttonContainer.appendChild(mainButton);
-    return buttonContainer;
-};
 
 // 將自定義內容插入到輸入框中
 export const insertCustomize = (customize: any, name: string) => {

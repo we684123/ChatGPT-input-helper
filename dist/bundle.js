@@ -237,14 +237,6 @@
       settingButton.id = "settingButton";
       return settingButton;
   };
-  // 創建按鈕容器，用於存放主按鈕和設定按鈕
-  const createButtonContainer = (mainButton, settingButton) => {
-      const buttonContainer = document.createElement("div");
-      buttonContainer.classList.add(config.CONTAINER_CLASS);
-      buttonContainer.appendChild(settingButton);
-      buttonContainer.appendChild(mainButton);
-      return buttonContainer;
-  };
   // 將自定義內容插入到輸入框中
   const insertCustomize = (customize, name) => {
       const textInputbox = document.querySelector(config.TEXT_INPUTBOX_POSITION);
@@ -291,16 +283,25 @@
       return menu;
   };
 
+  const bindElementContainer = (elements, containerClass) => {
+      const container = document.createElement("div");
+      if (containerClass) {
+          container.classList.add(containerClass);
+      }
+      elements.forEach((element) => {
+          container.appendChild(element);
+      });
+      return container;
+  };
+
   // addMenuBtn 函數用於新增包含主按鈕和設定按鈕的選單按鈕
-  const addMenuBtn = (containerNode, // 容器節點，用於將按鈕插入到頁面中的指定位置
-  customize, // 客製化選單項目的陣列
-  buttonText = "Click Me" // 主按鈕的文字，預設值為 "Click Me"
-  ) => {
+  function addMenuBtnWrapper(containerNode, customize, buttonText = "Click Me" // 主按鈕的文字，預設值為 "Click Me"
+  ) {
       // 創建主按鈕和設定按鈕
       const mainButton = createMainButton(buttonText);
       const settingButton = createSettingButton();
       // 將主按鈕和設定按鈕組合在一個容器中
-      const assButton = createButtonContainer(mainButton, settingButton);
+      const assButton = bindElementContainer([mainButton, settingButton], config.CONTAINER_CLASS);
       // 根據客製化選單項目創建選單
       const menu = createMenu(containerNode, customize);
       // 當滑鼠移到按鈕上時，顯示選單
@@ -319,7 +320,7 @@
           menu.style.display = "none";
       });
       console.log("已新增按鈕");
-  };
+  }
 
   function setCustomizeBtn(customize) {
       // 找到 settingButton 元素
@@ -548,7 +549,8 @@
                       // 將容器元素插入到目標元素後面
                       aimsNode.parentNode?.insertBefore(container, aimsNode.nextSibling);
                       // 新增一個按鈕元素
-                      addMenuBtn(container, customize, config.HELPER_MENU_TEXT);
+                      addMenuBtnWrapper(container, customize, config.HELPER_MENU_TEXT);
+                      // 設定 "設定按鈕"的點擊事件
                       setCustomizeBtn(customize);
                   }
               }

@@ -3,22 +3,22 @@ import "./buttonStyles.module.css";
 import {
     createMainButton,
     createSettingButton,
-    createButtonContainer,
     createMenu,
 } from "./buttonCreators";
+import { bindElementContainer } from "../utils/bindElementContainer";
+import { config } from "../config";
 
 // addMenuBtn 函數用於新增包含主按鈕和設定按鈕的選單按鈕
-export const addMenuBtn = (
-    containerNode: HTMLElement, // 容器節點，用於將按鈕插入到頁面中的指定位置
-    customize: Customization[], // 客製化選單項目的陣列
+export function addMenuBtnWrapper(containerNode: HTMLElement,
+    customize: Customization[],
     buttonText = "Click Me" // 主按鈕的文字，預設值為 "Click Me"
-) => {
+) {
     // 創建主按鈕和設定按鈕
     const mainButton = createMainButton(buttonText);
     const settingButton = createSettingButton();
 
     // 將主按鈕和設定按鈕組合在一個容器中
-    const assButton = createButtonContainer(mainButton, settingButton);
+    const assButton = bindElementContainer([mainButton, settingButton], config.CONTAINER_CLASS);
 
     // 根據客製化選單項目創建選單
     const menu = createMenu(containerNode, customize);
@@ -43,4 +43,4 @@ export const addMenuBtn = (
     });
 
     console.log("已新增按鈕");
-};
+}
