@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "clipboardy": "^3.0.0",
+    "rollup-plugin-external-globals": "^0.7.3",
     "sentinel-js": "^0.0.5"
   }
 }

@@ -1,7 +1,7 @@
 // rollup.config.js
 import typescript from 'rollup-plugin-typescript2';
 import postcss from 'rollup-plugin-postcss';
-
+import externalGlobals from 'rollup-plugin-external-globals';
 
 export default {
     input: 'src/main.ts', // 您的 TypeScript 檔案的路徑
@@ -17,6 +17,9 @@ export default {
         }),
         typescript({
             tsconfig: 'tsconfig.json', // 您的 TypeScript 設定檔案路徑
+        }),
+        externalGlobals({
+            'devextreme': 'DevExpress',
         }),
     ],
 };
