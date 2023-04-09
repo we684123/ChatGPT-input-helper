@@ -1,0 +1,27 @@
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #525467;
+  border: 1px solid black;
+  padding: 30px;
+  width: 80%;
+  max-width: 800px;
+  height: 80%;
+  max-height: 1200px;
+  z-index: 9999;
+}
+
+.add-button,
+.edit-button,
+.delete-button {
+  margin: 10px;
+  border: 2px solid #ffffff;
+}
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

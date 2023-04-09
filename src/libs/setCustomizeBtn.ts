@@ -1,4 +1,6 @@
 import { createFormPopup } from './createFormPopup';
+import styles from './setCustomizeBtn.module.css';
+
 
 export function setCustomizeBtn(customize: any) {
     // 找到 settingButton 元素
@@ -9,25 +11,12 @@ export function setCustomizeBtn(customize: any) {
     settingButton.addEventListener('click', () => {
         // 創建彈出視窗
         const popup = document.createElement('div');
-        popup.style.position = 'fixed';
-        popup.style.top = '50%';
-        popup.style.left = '50%';
-        popup.style.transform = 'translate(-50%, -50%)';
-        popup.style.background = '#525467';
-        popup.style.border = '1px solid black';
-        popup.style.padding = '30px';
-        popup.style.width = '80%';
-        popup.style.maxWidth = '800px';
-        popup.style.height = '60%';
-        popup.style.maxHeight = '1200px';
-
-        popup.style.zIndex = '9999';
+        popup.classList.add(styles.popup);
 
         // 創建新增按鈕
         const addButton = document.createElement('button');
         addButton.textContent = '新增(add)';
-        addButton.style.margin = '10px';
-        addButton.style.border = '2px solid #ffffff';
+        addButton.classList.add(styles['add-button']);
         // 當點擊 addButton 時觸發事件
         addButton.addEventListener('click', () => {
             // 使用 createFormPopup 函數
@@ -51,8 +40,7 @@ export function setCustomizeBtn(customize: any) {
         // 創建編輯按鈕
         const editButton = document.createElement('button');
         editButton.textContent = '編輯(edit)';
-        editButton.style.margin = '10px';
-        editButton.style.border = '2px solid #ffffff';
+        editButton.classList.add(styles['edit-button']);
         editButton.addEventListener('click', () => {
             // 編輯一個 item
             const index = prompt('請輸入要編輯的編號(edit index)') as string;
@@ -87,8 +75,7 @@ export function setCustomizeBtn(customize: any) {
         // 創建刪除按鈕
         const deleteButton = document.createElement('button');
         deleteButton.textContent = '刪除(delete)';
-        deleteButton.style.margin = '10px';
-        deleteButton.style.border = '2px solid #ffffff';
+        deleteButton.classList.add(styles['delete-button']);
         deleteButton.addEventListener('click', () => {
             // 刪除一個 item
             const index = prompt('請輸入要刪除的編號(delete index)');
@@ -104,9 +91,7 @@ export function setCustomizeBtn(customize: any) {
         // 創建關閉按鈕
         const closeButton = document.createElement('button');
         closeButton.textContent = '儲存並離開(save&exit)';
-        closeButton.style.position = 'absolute';
-        closeButton.style.top = '5px';
-        closeButton.style.right = '5px';
+        closeButton.classList.add(styles['close-button']);
         closeButton.addEventListener('click', () => {
             console.log(customize);
             // 儲存修改後的 customize 資料
