@@ -1,4 +1,4 @@
-export function showPopup(customize: any) {
+export function setCustomizeBtn(customize: any) {
     // 找到 settingButton 元素
     const settingButton = document.getElementById('settingButton') as HTMLElement;
     let newPosition: any;

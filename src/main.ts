@@ -2,7 +2,7 @@ import sentinel from "./utils/sentinel";
 import { onloadSafe } from "./utils/utils";
 
 import { addMenuBtn } from "./libs/addMenuBtn";
-import { showPopup } from "./libs/showPopup";
+import { setCustomizeBtn } from "./libs/setCustomizeBtn";
 
 import { config } from "./config";
 import "./style.css";
@@ -21,8 +21,9 @@ function main() {
     sentinel.on("nav", (nav: any) => {
       console.log("===== trigger sentinel.on nav =====");
 
-      const container = document.getElementById("helper_menu");
-      let GM_customize = GM_getValue("customizeData", customize); // 讀取 customize 設定
+      // 讀取 customize 設定
+      let GM_customize = GM_getValue("customizeData", customize);
+      // 如果 user 已經有設定了就用 user 的，沒有就用預設值
       if (GM_customize) {
         customize = GM_customize;
       } else {
@@ -31,6 +32,7 @@ function main() {
       }
 
       //找不到就新增
+      const container = document.getElementById("helper_menu");
       if (!container) {
         // 獲得目標元素
         const aimsNode = document.querySelector(config.NAV_MENU) as HTMLElement;
@@ -49,7 +51,7 @@ function main() {
           // 新增一個按鈕元素
           addMenuBtn(container, customize, config.HELPER_MENU_TEXT);
 
-          showPopup(customize);
+          setCustomizeBtn(customize);
         }
       }
     });

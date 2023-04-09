@@ -220,6 +220,7 @@
       INPUT_EVENT: new Event('input', { bubbles: true }),
   };
 
+  // 創建主按鈕
   const createMainButton = (buttonText) => {
       const mainButton = document.createElement("button");
       mainButton.innerText = buttonText;
@@ -227,6 +228,7 @@
       mainButton.style.width = "85%";
       return mainButton;
   };
+  // 創建設定按鈕
   const createSettingButton = () => {
       const settingButton = document.createElement("button");
       settingButton.innerText = "⚙️";
@@ -235,6 +237,7 @@
       settingButton.id = "settingButton";
       return settingButton;
   };
+  // 創建按鈕容器，用於存放主按鈕和設定按鈕
   const createButtonContainer = (mainButton, settingButton) => {
       const buttonContainer = document.createElement("div");
       buttonContainer.classList.add(config.CONTAINER_CLASS);
@@ -242,54 +245,44 @@
       buttonContainer.appendChild(mainButton);
       return buttonContainer;
   };
+  // 將自定義內容插入到輸入框中
   const insertCustomize = (customize, name) => {
-      // customize = 設定的object
-      // name = 觸發按鈕的名稱
-      console.log('insertCustomize 開始執行');
       const textInputbox = document.querySelector(config.TEXT_INPUTBOX_POSITION);
       const submitButton = document.querySelector(config.SUBMIT_BUTTON_POSITION);
       const item = customize.find((i) => i.name === name);
       if (item) {
-          console.log(`已找到名稱為 ${name} 的元素`);
-          // start = 最前面 , end = 最後面
-          // 有想要出游標定位，之後再說
-          // 例如 `請從 "" 繼續輸出` 就希望定在 "" 之間
           if (item.position === 'start') {
               textInputbox.value = item.content + textInputbox.value;
           }
           else {
               textInputbox.value += item.content;
           }
-          // 模擬，讓對話框可以自動更新高度
           textInputbox.dispatchEvent(config.INPUT_EVENT);
           textInputbox.focus();
-          console.log(`textInputbox.value =\n${textInputbox.value}`);
-          // 如果需要，自動按下 Enter
           if (item.autoEnter) {
-              console.log('autoEnter (O)');
               submitButton.click();
           }
-          console.log('====== insertCustomize 結束 ======');
       }
       else {
           console.error(`找不到名稱為 ${name} 的元素`);
       }
   };
+  // 創建選單項目
   const createMenuItem = (element, customize) => {
       const menuItem = document.createElement("button");
       menuItem.innerText = element.name;
       menuItem.id = element.name;
       menuItem.addEventListener("click", (event) => {
-          console.log("按鈕資訊：", event.target);
           insertCustomize(customize, event.target.id);
       });
       return menuItem;
   };
+  // 創建選單，包含多個選單項目
   const createMenu = (containerNode, customize) => {
-      const menu = document.createElement('div');
-      menu.id = 'helper_menu';
+      const menu = document.createElement("div");
+      menu.id = "helper_menu";
       menu.classList.add(config.MENU_CLASS);
-      menu.style.display = 'none';
+      menu.style.display = "none";
       menu.style.width = `${containerNode.offsetWidth}px`;
       customize.forEach((element) => {
           const menuItem = createMenuItem(element, customize);
@@ -298,26 +291,37 @@
       return menu;
   };
 
-  const addMenuBtn = (containerNode, customize, buttonText = "Click Me") => {
+  // addMenuBtn 函數用於新增包含主按鈕和設定按鈕的選單按鈕
+  const addMenuBtn = (containerNode, // 容器節點，用於將按鈕插入到頁面中的指定位置
+  customize, // 客製化選單項目的陣列
+  buttonText = "Click Me" // 主按鈕的文字，預設值為 "Click Me"
+  ) => {
+      // 創建主按鈕和設定按鈕
       const mainButton = createMainButton(buttonText);
       const settingButton = createSettingButton();
+      // 將主按鈕和設定按鈕組合在一個容器中
       const assButton = createButtonContainer(mainButton, settingButton);
+      // 根據客製化選單項目創建選單
       const menu = createMenu(containerNode, customize);
+      // 當滑鼠移到按鈕上時，顯示選單
       assButton.addEventListener("mouseenter", () => {
           menu.style.display = "block";
       });
+      // 創建按鈕包裹器，並將組合按鈕和選單加入其中
       const buttonWrapper = document.createElement("div");
       buttonWrapper.style.width = `${containerNode.offsetWidth}px`;
       buttonWrapper.appendChild(assButton);
       buttonWrapper.appendChild(menu);
+      // 將按鈕包裹器加入到容器節點中
       containerNode.appendChild(buttonWrapper);
+      // 當滑鼠離開按鈕包裹器時，隱藏選單
       buttonWrapper.addEventListener("mouseleave", () => {
           menu.style.display = "none";
       });
       console.log("已新增按鈕");
   };
 
-  function showPopup(customize) {
+  function setCustomizeBtn(customize) {
       // 找到 settingButton 元素
       const settingButton = document.getElementById('settingButton');
       let newPosition;
@@ -519,8 +523,9 @@
           let customize;
           sentinel.on("nav", (nav) => {
               console.log("===== trigger sentinel.on nav =====");
-              const container = document.getElementById("helper_menu");
-              let GM_customize = GM_getValue("customizeData", customize); // 讀取 customize 設定
+              // 讀取 customize 設定
+              let GM_customize = GM_getValue("customizeData", customize);
+              // 如果 user 已經有設定了就用 user 的，沒有就用預設值
               if (GM_customize) {
                   customize = GM_customize;
               }
@@ -529,6 +534,7 @@
                   GM_setValue("customizeData", customize);
               }
               //找不到就新增
+              const container = document.getElementById("helper_menu");
               if (!container) {
                   // 獲得目標元素
                   const aimsNode = document.querySelector(config.NAV_MENU);
@@ -543,7 +549,7 @@
                       aimsNode.parentNode?.insertBefore(container, aimsNode.nextSibling);
                       // 新增一個按鈕元素
                       addMenuBtn(container, customize, config.HELPER_MENU_TEXT);
-                      showPopup(customize);
+                      setCustomizeBtn(customize);
                   }
               }
           });
