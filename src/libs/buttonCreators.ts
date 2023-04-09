@@ -49,5 +49,26 @@ export const createMenu = (containerNode: any, customize: Customization[]) => {
         menu.appendChild(menuItem);
     });
 
+    console.log('customize.length');
+    console.log(customize.length);
+
+    if (customize.length > 3) {
+        const height = 39
+        console.log('height');
+        console.log(height);
+
+        let offset: number = Number(customize.length / 2 * height)
+        console.log('offset');
+        console.log(offset);
+        menu.style.top = `-${offset}px`;
+        console.log('menu.style.top');
+
+        menu.style.maxHeight = `${height * 7 * 2}px`;
+        // 7 是左邊nav由下到上的選項數量
+        // 2 因為有被對切
+
+    }
+
     return menu;
 };
+

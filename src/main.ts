@@ -5,7 +5,7 @@ import { addMenuBtnWrapper } from "./libs/addMenuBtn";
 import { setCustomizeBtn } from "./libs/setCustomizeBtn";
 
 import { config } from "./config/config";
-import "./style.css";
+import styles from "./libs/buttonStyles.module.css";
 
 main();
 
@@ -38,7 +38,7 @@ function main() {
         const aimsNode = document.querySelector(config.NAV_MENU) as HTMLElement;
         // 新增一個容器
         const container = document.createElement("div");
-        container.classList.add(config.CONTAINER_CLASS);
+        container.classList.add(styles.containerNode_class);
         container.id = "helper_menu";
 
         if (aimsNode) {
