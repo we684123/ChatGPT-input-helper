@@ -54,7 +54,6 @@ export const createMenu = (containerNode: any, customize: Customization[]) => {
 
     if (customize.length > 3) {
         const height = 39
-        // const height = containerNode.offsetHeight;
         console.log('height');
         console.log(height);
 
