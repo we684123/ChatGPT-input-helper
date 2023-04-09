@@ -1,11 +1,12 @@
 import { config } from "../config";
 import { Customization } from "../types/index";
+import styles from "./buttonStyles.module.css";
 
 // 創建主按鈕
 export const createMainButton = (buttonText: string): HTMLButtonElement => {
     const mainButton = document.createElement("button");
     mainButton.innerText = buttonText;
-    mainButton.classList.add(config.MAIN_BUTTON_CLASS);
+    mainButton.classList.add(styles.mainButton);
     mainButton.style.width = "85%";
     return mainButton;
 };
@@ -14,7 +15,7 @@ export const createMainButton = (buttonText: string): HTMLButtonElement => {
 export const createSettingButton = (): HTMLButtonElement => {
     const settingButton = document.createElement("button");
     settingButton.innerText = "⚙️";
-    settingButton.classList.add(config.MAIN_BUTTON_CLASS);
+    settingButton.classList.add(styles.settingButton);
     settingButton.style.width = "15%";
     settingButton.id = "settingButton";
     return settingButton;
@@ -61,7 +62,7 @@ const createMenuItem = (element: any, customize: Customization[]) => {
 export const createMenu = (containerNode: any, customize: Customization[]) => {
     const menu = document.createElement("div");
     menu.id = "helper_menu";
-    menu.classList.add(config.MENU_CLASS);
+    menu.classList.add(styles.menu);
     menu.style.display = "none";
     menu.style.width = `${containerNode.offsetWidth}px`;
 

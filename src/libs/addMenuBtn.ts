@@ -1,12 +1,13 @@
-import { Customization } from "../types/index";
-import "./buttonStyles.module.css";
 import {
     createMainButton,
     createSettingButton,
     createMenu,
 } from "./buttonCreators";
 import { bindElementContainer } from "../utils/bindElementContainer";
+
 import { config } from "../config";
+import { Customization } from "../types/index";
+
 
 // addMenuBtn 函數用於新增包含主按鈕和設定按鈕的選單按鈕
 export function addMenuBtnWrapper(containerNode: HTMLElement,
@@ -18,7 +19,7 @@ export function addMenuBtnWrapper(containerNode: HTMLElement,
     const settingButton = createSettingButton();
 
     // 將主按鈕和設定按鈕組合在一個容器中
-    const assButton = bindElementContainer([mainButton, settingButton], config.CONTAINER_CLASS);
+    const assButton = bindElementContainer([settingButton, mainButton], config.CONTAINER_CLASS);
 
     // 根據客製化選單項目創建選單
     const menu = createMenu(containerNode, customize);

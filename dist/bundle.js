@@ -143,36 +143,6 @@
       }
   }
 
-  function styleInject(css, ref) {
-    if ( ref === void 0 ) ref = {};
-    var insertAt = ref.insertAt;
-
-    if (!css || typeof document === 'undefined') { return; }
-
-    var head = document.head || document.getElementsByTagName('head')[0];
-    var style = document.createElement('style');
-    style.type = 'text/css';
-
-    if (insertAt === 'top') {
-      if (head.firstChild) {
-        head.insertBefore(style, head.firstChild);
-      } else {
-        head.appendChild(style);
-      }
-    } else {
-      head.appendChild(style);
-    }
-
-    if (style.styleSheet) {
-      style.styleSheet.cssText = css;
-    } else {
-      style.appendChild(document.createTextNode(css));
-    }
-  }
-
-  var css_248z$1 = ".buttonStyles-module_container__l-r9Y{align-items:center;border:1px solid #fff;border-radius:5px;box-sizing:border-box;display:flex;justify-content:center;position:relative;width:100%}.buttonStyles-module_mainButton__b08pW{border:1px solid #fff;border-radius:5px;margin:0 auto;width:85%}.buttonStyles-module_mainButton__b08pW,.buttonStyles-module_settingButton__-opQi{background-color:#525252;box-sizing:border-box;color:#fff;cursor:pointer;font-size:14px;padding:8px 12px}.buttonStyles-module_settingButton__-opQi{border:none;border-radius:5px;width:15%}.buttonStyles-module_menu__aeYDY{background-color:#2b2c2f;border:1px solid #fff;border-radius:15px;display:none;left:100%;position:absolute;top:0;width:100%;z-index:1}.buttonStyles-module_menu__aeYDY button{background-color:#2b2c2f;border:1px solid #fff;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:14px;height:100%;padding:8px 12px;width:100%}";
-  styleInject(css_248z$1);
-
   // library.ts
   const config = {
       name: "aims-helper",
@@ -220,11 +190,42 @@
       INPUT_EVENT: new Event('input', { bubbles: true }),
   };
 
+  function styleInject(css, ref) {
+    if ( ref === void 0 ) ref = {};
+    var insertAt = ref.insertAt;
+
+    if (!css || typeof document === 'undefined') { return; }
+
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var style = document.createElement('style');
+    style.type = 'text/css';
+
+    if (insertAt === 'top') {
+      if (head.firstChild) {
+        head.insertBefore(style, head.firstChild);
+      } else {
+        head.appendChild(style);
+      }
+    } else {
+      head.appendChild(style);
+    }
+
+    if (style.styleSheet) {
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
+  }
+
+  var css_248z$1 = ".buttonStyles-module_container__l-r9Y{align-items:center;border:1px solid #fff;border-radius:5px;box-sizing:border-box;display:flex;justify-content:center;position:relative;width:100%}.buttonStyles-module_mainButton__b08pW{border:1px solid #fff;border-radius:5px;margin:0 auto;width:85%}.buttonStyles-module_mainButton__b08pW,.buttonStyles-module_settingButton__-opQi{background-color:#525252;box-sizing:border-box;color:#fff;cursor:pointer;font-size:14px;padding:8px 12px}.buttonStyles-module_settingButton__-opQi{border:none;border-radius:5px;width:15%}.buttonStyles-module_menu__aeYDY{background-color:#2b2c2f;border:1px solid #fff;border-radius:15px;display:none;left:100%;position:absolute;top:0;width:100%;z-index:1}.buttonStyles-module_menu__aeYDY button{background-color:#2b2c2f;border:1px solid #fff;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:14px;height:100%;padding:8px 12px;width:100%}";
+  var styles = {"container":"buttonStyles-module_container__l-r9Y","mainButton":"buttonStyles-module_mainButton__b08pW","settingButton":"buttonStyles-module_settingButton__-opQi","menu":"buttonStyles-module_menu__aeYDY"};
+  styleInject(css_248z$1);
+
   // 創建主按鈕
   const createMainButton = (buttonText) => {
       const mainButton = document.createElement("button");
       mainButton.innerText = buttonText;
-      mainButton.classList.add(config.MAIN_BUTTON_CLASS);
+      mainButton.classList.add(styles.mainButton);
       mainButton.style.width = "85%";
       return mainButton;
   };
@@ -232,7 +233,7 @@
   const createSettingButton = () => {
       const settingButton = document.createElement("button");
       settingButton.innerText = "⚙️";
-      settingButton.classList.add(config.MAIN_BUTTON_CLASS);
+      settingButton.classList.add(styles.settingButton);
       settingButton.style.width = "15%";
       settingButton.id = "settingButton";
       return settingButton;
@@ -273,7 +274,7 @@
   const createMenu = (containerNode, customize) => {
       const menu = document.createElement("div");
       menu.id = "helper_menu";
-      menu.classList.add(config.MENU_CLASS);
+      menu.classList.add(styles.menu);
       menu.style.display = "none";
       menu.style.width = `${containerNode.offsetWidth}px`;
       customize.forEach((element) => {
@@ -301,7 +302,7 @@
       const mainButton = createMainButton(buttonText);
       const settingButton = createSettingButton();
       // 將主按鈕和設定按鈕組合在一個容器中
-      const assButton = bindElementContainer([mainButton, settingButton], config.CONTAINER_CLASS);
+      const assButton = bindElementContainer([settingButton, mainButton], config.CONTAINER_CLASS);
       // 根據客製化選單項目創建選單
       const menu = createMenu(containerNode, customize);
       // 當滑鼠移到按鈕上時，顯示選單
