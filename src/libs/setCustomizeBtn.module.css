@@ -25,3 +25,9 @@
   top: 5px;
   right: 5px;
 }
+
+.table-wrapper {
+  max-height: 612px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}

@@ -112,7 +112,10 @@ export function setCustomizeBtn(customize: any) {
 
         // 創建表格
         const table = document.createElement('table');
-        popup.appendChild(table);
+        const tableWrapper = document.createElement('div');
+        tableWrapper.classList.add(styles['table-wrapper']);
+        tableWrapper.appendChild(table);
+        popup.appendChild(tableWrapper);
 
         // 創建表頭
         const thead = document.createElement('thead');

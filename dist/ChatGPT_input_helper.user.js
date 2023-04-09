@@ -171,9 +171,9 @@
     }
   }
 
-  var css_248z$1 = ".buttonStyles-module_container__l-r9Y{align-items:center;border:1px solid #fff;border-radius:5px;box-sizing:border-box;display:flex;justify-content:center;position:relative;width:100%}.buttonStyles-module_mainButton__b08pW{border:1px solid #fff;border-radius:5px;margin:0 auto;padding:8px 12px;width:85%}.buttonStyles-module_mainButton__b08pW,.buttonStyles-module_settingButton__-opQi{background-color:#202123;box-sizing:border-box;color:#fff;cursor:pointer;font-size:14px}.buttonStyles-module_settingButton__-opQi{border:none;border-radius:5px;padding:8px 14px;width:15%}.buttonStyles-module_menu__aeYDY{background-color:#202123;border:1px solid #fff;border-radius:15px;display:none;left:100%;max-height:240px;overflow-y:auto;position:absolute;top:0;width:100%;z-index:1}.buttonStyles-module_menuButton__eg9D8{background-color:#202123;border:1px solid #fff;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:14px;height:100%;padding:8px 12px;width:100%}.buttonStyles-module_containerNode_class__1rDgQ{position:relative}";
-  var styles$1 = {"container":"buttonStyles-module_container__l-r9Y","mainButton":"buttonStyles-module_mainButton__b08pW","settingButton":"buttonStyles-module_settingButton__-opQi","menu":"buttonStyles-module_menu__aeYDY","menuButton":"buttonStyles-module_menuButton__eg9D8","containerNode_class":"buttonStyles-module_containerNode_class__1rDgQ"};
-  styleInject(css_248z$1);
+  var css_248z$2 = ".buttonStyles-module_container__l-r9Y{align-items:center;border:1px solid #fff;border-radius:5px;box-sizing:border-box;display:flex;justify-content:center;position:relative;width:100%}.buttonStyles-module_mainButton__b08pW{border:1px solid #fff;border-radius:5px;margin:0 auto;padding:8px 12px;width:85%}.buttonStyles-module_mainButton__b08pW,.buttonStyles-module_settingButton__-opQi{background-color:#202123;box-sizing:border-box;color:#fff;cursor:pointer;font-size:14px}.buttonStyles-module_settingButton__-opQi{border:none;border-radius:5px;padding:8px 14px;width:15%}.buttonStyles-module_menu__aeYDY{background-color:#202123;border:1px solid #fff;border-radius:15px;display:none;left:100%;max-height:240px;overflow-y:auto;position:absolute;top:0;width:100%;z-index:1}.buttonStyles-module_menuButton__eg9D8{background-color:#202123;border:1px solid #fff;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:14px;height:100%;padding:8px 12px;width:100%}.buttonStyles-module_containerNode_class__1rDgQ{position:relative}";
+  var styles$2 = {"container":"buttonStyles-module_container__l-r9Y","mainButton":"buttonStyles-module_mainButton__b08pW","settingButton":"buttonStyles-module_settingButton__-opQi","menu":"buttonStyles-module_menu__aeYDY","menuButton":"buttonStyles-module_menuButton__eg9D8","containerNode_class":"buttonStyles-module_containerNode_class__1rDgQ"};
+  styleInject(css_248z$2);
 
   // library.ts
   const config = {
@@ -251,7 +251,7 @@
   const createMainButton = (buttonText) => {
       const mainButton = document.createElement("button");
       mainButton.innerText = buttonText;
-      mainButton.classList.add(styles$1.mainButton);
+      mainButton.classList.add(styles$2.mainButton);
       mainButton.style.width = "86%";
       return mainButton;
   };
@@ -259,7 +259,7 @@
   const createSettingButton = () => {
       const settingButton = document.createElement("button");
       settingButton.innerText = "⚙️";
-      settingButton.classList.add(styles$1.settingButton);
+      settingButton.classList.add(styles$2.settingButton);
       settingButton.style.width = "14%";
       settingButton.id = "settingButton";
       return settingButton;
@@ -269,7 +269,7 @@
       const menuItem = document.createElement("button");
       menuItem.innerText = element.name;
       menuItem.id = element.name;
-      menuItem.classList.add(styles$1.menuButton);
+      menuItem.classList.add(styles$2.menuButton);
       menuItem.addEventListener("click", (event) => {
           insertCustomize(customize, event.target.id);
       });
@@ -279,7 +279,7 @@
   const createMenu = (containerNode, customize) => {
       const menu = document.createElement("div");
       menu.id = "helper_menu";
-      menu.classList.add(styles$1.menu);
+      menu.classList.add(styles$2.menu);
       menu.style.display = "none";
       menu.style.width = `${containerNode.offsetWidth}px`;
       customize.forEach((element) => {
@@ -346,15 +346,15 @@
       console.log("已新增按鈕");
   }
 
-  var css_248z = ".formPopupStyles-module_form-popup__cpX-x{background-color:#40414f;border:1px solid #000;height:60%;left:50%;max-height:1200px;max-width:800px;padding:30px;position:fixed;top:50%;transform:translate(-50%,-50%);width:80%;z-index:9999}.formPopupStyles-module_form__A8xi3{display:flex;flex-direction:column;gap:15px}.formPopupStyles-module_form-row__sMrG8{display:flex;flex-direction:column;gap:5px}.formPopupStyles-module_input__f-v3V{background-color:#545766;border:1px solid #fff;color:#fff;margin-left:4px;padding:4px 8px}textarea.formPopupStyles-module_input__f-v3V{min-height:100px;width:100%}";
-  var styles = {"form-popup":"formPopupStyles-module_form-popup__cpX-x","form":"formPopupStyles-module_form__A8xi3","form-row":"formPopupStyles-module_form-row__sMrG8","input":"formPopupStyles-module_input__f-v3V"};
-  styleInject(css_248z);
+  var css_248z$1 = ".formPopupStyles-module_form-popup__cpX-x{background-color:#40414f;border:1px solid #000;height:60%;left:50%;max-height:1200px;max-width:800px;padding:30px;position:fixed;top:50%;transform:translate(-50%,-50%);width:80%;z-index:9999}.formPopupStyles-module_form__A8xi3{display:flex;flex-direction:column;gap:15px}.formPopupStyles-module_form-row__sMrG8{display:flex;flex-direction:column;gap:5px}.formPopupStyles-module_input__f-v3V{background-color:#545766;border:1px solid #fff;color:#fff;margin-left:4px;padding:4px 8px}textarea.formPopupStyles-module_input__f-v3V{min-height:100px;width:100%}";
+  var styles$1 = {"form-popup":"formPopupStyles-module_form-popup__cpX-x","form":"formPopupStyles-module_form__A8xi3","form-row":"formPopupStyles-module_form-row__sMrG8","input":"formPopupStyles-module_input__f-v3V"};
+  styleInject(css_248z$1);
 
   // createFormPopup.ts
   function createFormPopup(options) {
       // 創建彈出視窗
       const formPopup = document.createElement('div');
-      formPopup.className = styles['form-popup'];
+      formPopup.className = styles$1['form-popup'];
       // 創建標題
       const titleLabel = document.createElement('h2');
       titleLabel.textContent = options.title;
@@ -362,21 +362,21 @@
       // 創建表單
       const form = document.createElement('form');
       formPopup.appendChild(form);
-      form.className = styles.form;
+      form.className = styles$1.form;
       // 創建名稱輸入框
       const nameLabel = document.createElement('label');
       nameLabel.textContent = '名稱(name)';
       form.appendChild(nameLabel);
       const nameInput = document.createElement('input');
       nameInput.type = 'text';
-      nameInput.className = styles.input;
+      nameInput.className = styles$1.input;
       form.appendChild(nameInput);
       // 創建位置選擇
       const positionLabel = document.createElement('label');
       positionLabel.textContent = '位置(position)';
       form.appendChild(positionLabel);
       const positionSelect = document.createElement('select');
-      positionSelect.className = styles.input;
+      positionSelect.className = styles$1.input;
       const positionStartOption = document.createElement('option');
       positionStartOption.value = 'start';
       positionStartOption.textContent = 'start';
@@ -398,7 +398,7 @@
       contentLabel.textContent = '內容(content)';
       form.appendChild(contentLabel);
       const contentTextarea = document.createElement('textarea');
-      contentTextarea.className = `${styles.input} ${styles['textarea-input']}`;
+      contentTextarea.className = `${styles$1.input} ${styles$1['textarea-input']}`;
       form.appendChild(contentTextarea);
       // 創建提交按鈕
       const submitButton = document.createElement('button');
@@ -435,6 +435,10 @@
       document.body.appendChild(formPopup);
   }
 
+  var css_248z = ".setCustomizeBtn-module_popup__uF6hF{background:#525467;border:1px solid #000;height:80%;left:50%;max-height:1200px;max-width:800px;padding:30px;position:fixed;top:50%;transform:translate(-50%,-50%);width:80%;z-index:9999}.setCustomizeBtn-module_add-button__IASCv,.setCustomizeBtn-module_delete-button__8I8BH,.setCustomizeBtn-module_edit-button__NqnT6{border:2px solid #fff;margin:10px}.setCustomizeBtn-module_close-button__uw4Q6{position:absolute;right:5px;top:5px}.setCustomizeBtn-module_table-wrapper__LY27P{margin-bottom:20px;max-height:612px;overflow-y:auto}";
+  var styles = {"popup":"setCustomizeBtn-module_popup__uF6hF","add-button":"setCustomizeBtn-module_add-button__IASCv","edit-button":"setCustomizeBtn-module_edit-button__NqnT6","delete-button":"setCustomizeBtn-module_delete-button__8I8BH","close-button":"setCustomizeBtn-module_close-button__uw4Q6","table-wrapper":"setCustomizeBtn-module_table-wrapper__LY27P"};
+  styleInject(css_248z);
+
   function setCustomizeBtn(customize) {
       // 找到 settingButton 元素
       const settingButton = document.getElementById('settingButton');
@@ -442,23 +446,11 @@
       settingButton.addEventListener('click', () => {
           // 創建彈出視窗
           const popup = document.createElement('div');
-          popup.style.position = 'fixed';
-          popup.style.top = '50%';
-          popup.style.left = '50%';
-          popup.style.transform = 'translate(-50%, -50%)';
-          popup.style.background = '#525467';
-          popup.style.border = '1px solid black';
-          popup.style.padding = '30px';
-          popup.style.width = '80%';
-          popup.style.maxWidth = '800px';
-          popup.style.height = '60%';
-          popup.style.maxHeight = '1200px';
-          popup.style.zIndex = '9999';
+          popup.classList.add(styles.popup);
           // 創建新增按鈕
           const addButton = document.createElement('button');
           addButton.textContent = '新增(add)';
-          addButton.style.margin = '10px';
-          addButton.style.border = '2px solid #ffffff';
+          addButton.classList.add(styles['add-button']);
           // 當點擊 addButton 時觸發事件
           addButton.addEventListener('click', () => {
               // 使用 createFormPopup 函數
@@ -481,8 +473,7 @@
           // 創建編輯按鈕
           const editButton = document.createElement('button');
           editButton.textContent = '編輯(edit)';
-          editButton.style.margin = '10px';
-          editButton.style.border = '2px solid #ffffff';
+          editButton.classList.add(styles['edit-button']);
           editButton.addEventListener('click', () => {
               // 編輯一個 item
               const index = prompt('請輸入要編輯的編號(edit index)');
@@ -515,8 +506,7 @@
           // 創建刪除按鈕
           const deleteButton = document.createElement('button');
           deleteButton.textContent = '刪除(delete)';
-          deleteButton.style.margin = '10px';
-          deleteButton.style.border = '2px solid #ffffff';
+          deleteButton.classList.add(styles['delete-button']);
           deleteButton.addEventListener('click', () => {
               // 刪除一個 item
               const index = prompt('請輸入要刪除的編號(delete index)');
@@ -532,9 +522,7 @@
           // 創建關閉按鈕
           const closeButton = document.createElement('button');
           closeButton.textContent = '儲存並離開(save&exit)';
-          closeButton.style.position = 'absolute';
-          closeButton.style.top = '5px';
-          closeButton.style.right = '5px';
+          closeButton.classList.add(styles['close-button']);
           closeButton.addEventListener('click', () => {
               console.log(customize);
               // 儲存修改後的 customize 資料
@@ -551,7 +539,11 @@
           popup.appendChild(closeButton);
           // 創建表格
           const table = document.createElement('table');
-          popup.appendChild(table);
+          const tableWrapper = document.createElement('div');
+          tableWrapper.classList.add(styles['table-wrapper']);
+          tableWrapper.appendChild(table);
+          popup.appendChild(tableWrapper);
+          // popup.appendChild(table);
           // 創建表頭
           const thead = document.createElement('thead');
           const tr = document.createElement('tr');
@@ -640,7 +632,7 @@
                   const aimsNode = document.querySelector(config.NAV_MENU);
                   // 新增一個容器
                   const container = document.createElement("div");
-                  container.classList.add(styles$1.containerNode_class);
+                  container.classList.add(styles$2.containerNode_class);
                   container.id = "helper_menu";
                   if (aimsNode) {
                       // 設定 container 寬度為父元素寬度
