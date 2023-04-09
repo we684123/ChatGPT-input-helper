@@ -12,7 +12,8 @@ export default {
     },
     plugins: [
         postcss({
-            inject: true, // 將 CSS 作為 JavaScript 插入
+            inject: true, // 將 CSS 注入到 JavaScript bundle 中
+            minimize: true, // 最小化 CSS（移除空白和註釋）
         }),
         typescript({
             tsconfig: 'tsconfig.json', // 您的 TypeScript 設定檔案路徑

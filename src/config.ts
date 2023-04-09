@@ -44,4 +44,7 @@ export const config = {
   HELPER_MENU_TEXT: 'input helper',
   // ↓ 按鈕用容器
   CONTAINER_CLASS: 'helper_textcontainer',
+
+  // ↓ 模擬輸入於輸入框的事件
+  INPUT_EVENT: new Event('input', { bubbles: true }),
 }
