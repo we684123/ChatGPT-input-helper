@@ -11,6 +11,8 @@
 // @match        https://chat.openai.com/chat
 // @match        https://chat.openai.com/chat/*
 // @match        https://chat.openai.com/chat?*
+// @require      https://code.jquery.com/jquery-3.5.1.min.js
+// @require      https://cdn3.devexpress.com/jslib/22.2.5/js/dx.all.js
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_deleteValue

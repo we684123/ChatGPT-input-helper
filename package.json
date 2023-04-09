@@ -10,6 +10,7 @@
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^11.1.0",
+    "@types/devextreme": "^16.2.1",
     "prettier": "^2.6.2",
     "rollup": "^3.20.2",
     "rollup-plugin-add-shebang": "^0.3.1",

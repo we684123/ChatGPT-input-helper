@@ -5,11 +5,13 @@ import { addMenuBtnWrapper } from "./libs/addMenuBtn";
 import { setCustomizeBtn } from "./libs/setCustomizeBtn";
 
 import { config } from "./config";
-import "./style.css";
+import { addStylesheet } from "./utils/addStylesheet";
 
 main();
 
 function main() {
+  addStylesheet(config.dx_common_css_url)
+
   // 頁面載入完成後執行
   onloadSafe(() => {
     // 監聽 nav 元素

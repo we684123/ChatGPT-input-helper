@@ -47,4 +47,6 @@ export const config = {
 
   // ↓ 模擬輸入於輸入框的事件
   INPUT_EVENT: new Event('input', { bubbles: true }),
+
+  dx_common_css_url: "https://cdn3.devexpress.com/jslib/22.2.5/css/dx.light.css",
 }

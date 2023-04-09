@@ -11,6 +11,8 @@
 // @match        https://chat.openai.com/chat
 // @match        https://chat.openai.com/chat/*
 // @match        https://chat.openai.com/chat?*
+// @require      https://code.jquery.com/jquery-3.5.1.min.js
+// @require      https://cdn3.devexpress.com/jslib/22.2.5/js/dx.all.js
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_deleteValue
@@ -171,9 +173,9 @@
     }
   }
 
-  var css_248z$1 = ".buttonStyles-module_container__l-r9Y{align-items:center;border:1px solid #fff;border-radius:5px;box-sizing:border-box;display:flex;justify-content:center;position:relative;width:100%}.buttonStyles-module_mainButton__b08pW{border:1px solid #fff;border-radius:5px;margin:0 auto;padding:8px 12px;width:85%}.buttonStyles-module_mainButton__b08pW,.buttonStyles-module_settingButton__-opQi{background-color:#202123;box-sizing:border-box;color:#fff;cursor:pointer;font-size:14px}.buttonStyles-module_settingButton__-opQi{border:none;border-radius:5px;padding:8px 14px;width:15%}.buttonStyles-module_menu__aeYDY{background-color:#202123;border:1px solid #fff;border-radius:15px;display:none;left:100px;position:absolute;width:100%;z-index:1}.buttonStyles-module_menuButton__eg9D8{background-color:#202123;border:1px solid #fff;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:14px;height:100%;padding:8px 12px;width:100%}";
+  var css_248z = ".buttonStyles-module_container__l-r9Y{align-items:center;border:1px solid #fff;border-radius:5px;box-sizing:border-box;display:flex;justify-content:center;position:relative;width:100%}.buttonStyles-module_mainButton__b08pW{border:1px solid #fff;border-radius:5px;margin:0 auto;padding:8px 12px;width:85%}.buttonStyles-module_mainButton__b08pW,.buttonStyles-module_settingButton__-opQi{background-color:#202123;box-sizing:border-box;color:#fff;cursor:pointer;font-size:14px}.buttonStyles-module_settingButton__-opQi{border:none;border-radius:5px;padding:8px 14px;width:15%}.buttonStyles-module_menu__aeYDY{background-color:#202123;border:1px solid #fff;border-radius:15px;display:none;left:100px;position:absolute;width:100%;z-index:1}.buttonStyles-module_menuButton__eg9D8{background-color:#202123;border:1px solid #fff;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:14px;height:100%;padding:8px 12px;width:100%}";
   var styles = {"container":"buttonStyles-module_container__l-r9Y","mainButton":"buttonStyles-module_mainButton__b08pW","settingButton":"buttonStyles-module_settingButton__-opQi","menu":"buttonStyles-module_menu__aeYDY","menuButton":"buttonStyles-module_menuButton__eg9D8"};
-  styleInject(css_248z$1);
+  styleInject(css_248z);
 
   // library.ts
   const config = {
@@ -220,6 +222,7 @@
       CONTAINER_CLASS: 'helper_textcontainer',
       // ↓ 模擬輸入於輸入框的事件
       INPUT_EVENT: new Event('input', { bubbles: true }),
+      dx_common_css_url: "https://cdn3.devexpress.com/jslib/22.2.5/css/dx.light.css",
   };
 
   // 將自定義內容插入到輸入框中
@@ -519,11 +522,17 @@
       });
   }
 
-  var css_248z = ".custom-element{background-color:#f9f9f9;border:1px solid #ccc;border-radius:4px;color:#333;font-size:14px;padding:10px}";
-  styleInject(css_248z);
+  function addStylesheet(href) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = href;
+      document.head.appendChild(link);
+  }
 
   main();
   function main() {
+      addStylesheet(config.dx_common_css_url);
       // 頁面載入完成後執行
       onloadSafe(() => {
           // 監聽 nav 元素
