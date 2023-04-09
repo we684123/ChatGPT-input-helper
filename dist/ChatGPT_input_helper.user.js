@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         ChatGPT-input-helper2
-// @name:zh-TW   ChatGPT-input-helper2 快速輸入常用咒文
-// @namespace    https://github.com/we684123/ChatGPT-input-helper2
-// @version      0.0.4
+// @name         ChatGPT-input-helper
+// @name:zh-TW   ChatGPT-input-helper 快速輸入常用咒文
+// @namespace    https://github.com/we684123/ChatGPT-input-helper
+// @version      0.0.5
 // @author       we684123
 // @description  Help organize commonly used spells quickly
 // @description:zh-TW  幫助快速組織常用咒文
