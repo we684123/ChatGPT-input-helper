@@ -6,7 +6,7 @@ import postcss from 'rollup-plugin-postcss';
 export default {
     input: 'src/main.ts', // 您的 TypeScript 檔案的路徑
     output: {
-        file: 'dist/bundle.js', // 打包後的檔案路徑
+        file: 'dist/ChatGPT_input_helper.user.js', // 打包後的檔案路徑
         format: 'umd', // 使用通用模組定義 (UMD) 格式，兼容多種環境
         name: 'MyTampermonkeyScript' // 為 UMD 模組指定名稱
     },
