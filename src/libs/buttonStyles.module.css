@@ -42,7 +42,7 @@
   top: 0;
   z-index: 1;
   width: 100%;
-  max-height: 150px; /* 您可以根據需要設置合適的最大高度 */
+  max-height: 240px;
   overflow-y: auto;
   background-color: #202123;
   border: 1px solid #fff;
