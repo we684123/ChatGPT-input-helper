@@ -1,0 +1,40 @@
+/* formPopupStyles.module.css */
+.form-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #40414f;
+  border: 1px solid black;
+  padding: 30px;
+  width: 80%;
+  max-width: 800px;
+  height: 60%;
+  max-height: 1200px;
+  z-index: 9999;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input {
+  background-color: #545766;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 4px 8px;
+  margin-left: 4px;
+}
+
+textarea.input {
+  width: 100%;
+  min-height: 100px;
+}

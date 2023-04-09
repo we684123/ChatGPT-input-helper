@@ -4,7 +4,7 @@ import { onloadSafe } from "./utils/utils";
 import { addMenuBtnWrapper } from "./libs/addMenuBtn";
 import { setCustomizeBtn } from "./libs/setCustomizeBtn";
 
-import { config } from "./config";
+import { config } from "./config/config";
 import "./style.css";
 
 main();

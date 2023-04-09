@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const tampermonkeyHeader = fs.readFileSync('./src/config.tampermonkeyHeader', 'utf8');
+const tampermonkeyHeader = fs.readFileSync('./src/config/config.tampermonkeyHeader', 'utf8');
 const outputPath = path.resolve(__dirname, 'dist', 'ChatGPT_input_helper.user.js');
 
 fs.readFile(outputPath, 'utf8', async (err, data) => {

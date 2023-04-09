@@ -1,4 +1,4 @@
-import { config } from "../config";
+import { config } from "../config/config";
 import { Customization } from "../types/index";
 
 // 將自定義內容插入到輸入框中

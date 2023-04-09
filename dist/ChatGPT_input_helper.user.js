@@ -2,7 +2,7 @@
 // @name         ChatGPT-input-helper
 // @name:zh-TW   ChatGPT-input-helper 快速輸入常用咒文
 // @namespace    https://github.com/we684123/ChatGPT-input-helper
-// @version      0.0.6
+// @version      0.0.7
 // @author       we684123
 // @description  Help organize commonly used spells quickly
 // @description:zh-TW  幫助快速組織常用咒文
@@ -171,9 +171,9 @@
     }
   }
 
-  var css_248z$1 = ".buttonStyles-module_container__l-r9Y{align-items:center;border:1px solid #fff;border-radius:5px;box-sizing:border-box;display:flex;justify-content:center;position:relative;width:100%}.buttonStyles-module_mainButton__b08pW{border:1px solid #fff;border-radius:5px;margin:0 auto;padding:8px 12px;width:85%}.buttonStyles-module_mainButton__b08pW,.buttonStyles-module_settingButton__-opQi{background-color:#202123;box-sizing:border-box;color:#fff;cursor:pointer;font-size:14px}.buttonStyles-module_settingButton__-opQi{border:none;border-radius:5px;padding:8px 14px;width:15%}.buttonStyles-module_menu__aeYDY{background-color:#202123;border:1px solid #fff;border-radius:15px;display:none;left:100px;position:absolute;width:100%;z-index:1}.buttonStyles-module_menuButton__eg9D8{background-color:#202123;border:1px solid #fff;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:14px;height:100%;padding:8px 12px;width:100%}";
-  var styles = {"container":"buttonStyles-module_container__l-r9Y","mainButton":"buttonStyles-module_mainButton__b08pW","settingButton":"buttonStyles-module_settingButton__-opQi","menu":"buttonStyles-module_menu__aeYDY","menuButton":"buttonStyles-module_menuButton__eg9D8"};
-  styleInject(css_248z$1);
+  var css_248z$2 = ".buttonStyles-module_container__l-r9Y{align-items:center;border:1px solid #fff;border-radius:5px;box-sizing:border-box;display:flex;justify-content:center;position:relative;width:100%}.buttonStyles-module_mainButton__b08pW{border:1px solid #fff;border-radius:5px;margin:0 auto;padding:8px 12px;width:85%}.buttonStyles-module_mainButton__b08pW,.buttonStyles-module_settingButton__-opQi{background-color:#202123;box-sizing:border-box;color:#fff;cursor:pointer;font-size:14px}.buttonStyles-module_settingButton__-opQi{border:none;border-radius:5px;padding:8px 14px;width:15%}.buttonStyles-module_menu__aeYDY{background-color:#202123;border:1px solid #fff;border-radius:15px;display:none;left:100px;position:absolute;width:100%;z-index:1}.buttonStyles-module_menuButton__eg9D8{background-color:#202123;border:1px solid #fff;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:14px;height:100%;padding:8px 12px;width:100%}";
+  var styles$1 = {"container":"buttonStyles-module_container__l-r9Y","mainButton":"buttonStyles-module_mainButton__b08pW","settingButton":"buttonStyles-module_settingButton__-opQi","menu":"buttonStyles-module_menu__aeYDY","menuButton":"buttonStyles-module_menuButton__eg9D8"};
+  styleInject(css_248z$2);
 
   // library.ts
   const config = {
@@ -251,7 +251,7 @@
   const createMainButton = (buttonText) => {
       const mainButton = document.createElement("button");
       mainButton.innerText = buttonText;
-      mainButton.classList.add(styles.mainButton);
+      mainButton.classList.add(styles$1.mainButton);
       mainButton.style.width = "86%";
       return mainButton;
   };
@@ -259,7 +259,7 @@
   const createSettingButton = () => {
       const settingButton = document.createElement("button");
       settingButton.innerText = "⚙️";
-      settingButton.classList.add(styles.settingButton);
+      settingButton.classList.add(styles$1.settingButton);
       settingButton.style.width = "14%";
       settingButton.id = "settingButton";
       return settingButton;
@@ -269,7 +269,7 @@
       const menuItem = document.createElement("button");
       menuItem.innerText = element.name;
       menuItem.id = element.name;
-      menuItem.classList.add(styles.menuButton);
+      menuItem.classList.add(styles$1.menuButton);
       menuItem.addEventListener("click", (event) => {
           insertCustomize(customize, event.target.id);
       });
@@ -279,7 +279,7 @@
   const createMenu = (containerNode, customize) => {
       const menu = document.createElement("div");
       menu.id = "helper_menu";
-      menu.classList.add(styles.menu);
+      menu.classList.add(styles$1.menu);
       menu.style.display = "none";
       menu.style.width = `${containerNode.offsetWidth}px`;
       customize.forEach((element) => {
@@ -330,11 +330,98 @@
       console.log("已新增按鈕");
   }
 
+  var css_248z$1 = ".formPopupStyles-module_form-popup__cpX-x{background-color:#40414f;border:1px solid #000;height:60%;left:50%;max-height:1200px;max-width:800px;padding:30px;position:fixed;top:50%;transform:translate(-50%,-50%);width:80%;z-index:9999}.formPopupStyles-module_form__A8xi3{display:flex;flex-direction:column;gap:15px}.formPopupStyles-module_form-row__sMrG8{display:flex;flex-direction:column;gap:5px}.formPopupStyles-module_input__f-v3V{background-color:#545766;border:1px solid #fff;color:#fff;margin-left:4px;padding:4px 8px}textarea.formPopupStyles-module_input__f-v3V{min-height:100px;width:100%}";
+  var styles = {"form-popup":"formPopupStyles-module_form-popup__cpX-x","form":"formPopupStyles-module_form__A8xi3","form-row":"formPopupStyles-module_form-row__sMrG8","input":"formPopupStyles-module_input__f-v3V"};
+  styleInject(css_248z$1);
+
+  // createFormPopup.ts
+  function createFormPopup(options) {
+      // 創建彈出視窗
+      const formPopup = document.createElement('div');
+      formPopup.className = styles['form-popup'];
+      // 創建標題
+      const titleLabel = document.createElement('h2');
+      titleLabel.textContent = options.title;
+      formPopup.appendChild(titleLabel);
+      // 創建表單
+      const form = document.createElement('form');
+      formPopup.appendChild(form);
+      form.className = styles.form;
+      // 創建名稱輸入框
+      const nameLabel = document.createElement('label');
+      nameLabel.textContent = '名稱(name)';
+      form.appendChild(nameLabel);
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text';
+      nameInput.className = styles.input;
+      form.appendChild(nameInput);
+      // 創建位置選擇
+      const positionLabel = document.createElement('label');
+      positionLabel.textContent = '位置(position)';
+      form.appendChild(positionLabel);
+      const positionSelect = document.createElement('select');
+      positionSelect.className = styles.input;
+      const positionStartOption = document.createElement('option');
+      positionStartOption.value = 'start';
+      positionStartOption.textContent = 'start';
+      const positionEndOption = document.createElement('option');
+      positionEndOption.value = 'end';
+      positionEndOption.textContent = 'end';
+      positionSelect.appendChild(positionStartOption);
+      positionSelect.appendChild(positionEndOption);
+      form.appendChild(positionSelect);
+      // 創建是否自動輸入選擇
+      const autoEnterLabel = document.createElement('label');
+      autoEnterLabel.textContent = '是否自動輸入(AutoEnter)';
+      form.appendChild(autoEnterLabel);
+      const autoEnterInput = document.createElement('input');
+      autoEnterInput.type = 'checkbox';
+      form.appendChild(autoEnterInput);
+      // 創建內容輸入框
+      const contentLabel = document.createElement('label');
+      contentLabel.textContent = '內容(content)';
+      form.appendChild(contentLabel);
+      const contentTextarea = document.createElement('textarea');
+      contentTextarea.className = `${styles.input} ${styles['textarea-input']}`;
+      form.appendChild(contentTextarea);
+      // 創建提交按鈕
+      const submitButton = document.createElement('button');
+      submitButton.type = 'submit';
+      submitButton.textContent = '提交';
+      form.appendChild(submitButton);
+      // 根據編輯模式，填充初始值
+      if (options.mode === 'edit' && options.initialValues) {
+          nameInput.value = options.initialValues.name;
+          positionSelect.value = options.initialValues.position;
+          autoEnterInput.checked = options.initialValues.autoEnter;
+          contentTextarea.value = options.initialValues.content;
+      }
+      // 提交表單時的處理
+      form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const values = {
+              name: nameInput.value,
+              position: positionSelect.value,
+              autoEnter: autoEnterInput.checked,
+              content: contentTextarea.value,
+          };
+          console.log('values', values);
+          options.onSubmit(values);
+          document.body.removeChild(formPopup);
+      });
+      // 點擊彈窗外的地方關閉彈窗
+      formPopup.addEventListener('click', (event) => {
+          if (event.target === formPopup) {
+              document.body.removeChild(formPopup);
+          }
+      });
+      // 將彈出視窗加入頁面中
+      document.body.appendChild(formPopup);
+  }
+
   function setCustomizeBtn(customize) {
       // 找到 settingButton 元素
       const settingButton = document.getElementById('settingButton');
-      let newPosition;
-      let newAutoEnter;
       // 當點擊 settingButton 時觸發事件
       settingButton.addEventListener('click', () => {
           // 創建彈出視窗
@@ -356,15 +443,23 @@
           addButton.textContent = '新增(add)';
           addButton.style.margin = '10px';
           addButton.style.border = '2px solid #ffffff';
+          // 當點擊 addButton 時觸發事件
           addButton.addEventListener('click', () => {
-              // 新增一個 item
-              const newItem = {
-                  name: '',
-                  position: '',
-                  content: ''
-              };
-              customize.push(newItem);
-              renderTable();
+              // 使用 createFormPopup 函數
+              createFormPopup({
+                  title: '新增',
+                  mode: 'add',
+                  onSubmit: (values) => {
+                      const newItem = {
+                          name: values.name,
+                          position: values.position,
+                          autoEnter: values.autoEnter,
+                          content: values.content,
+                      };
+                      customize.push(newItem);
+                      renderTable();
+                  },
+              });
           });
           popup.appendChild(addButton);
           // 創建編輯按鈕
@@ -377,41 +472,24 @@
               const index = prompt('請輸入要編輯的編號(edit index)');
               if (index && Number(index) >= 1 && index <= customize.length) {
                   const item = customize[Number(index) - 1];
-                  // 編輯 name
-                  const newName = prompt('請輸入新的 name', item.name);
-                  if (newName !== null) {
-                      item.name = newName;
-                  }
-                  // 編輯 position
-                  do {
-                      newPosition = prompt('請輸入新的 position (只能輸入 start 或 end)', item.position);
-                  } while (newPosition !== null && newPosition !== 'start' && newPosition !== 'end');
-                  if (newPosition !== null) {
-                      item.position = newPosition;
-                  }
-                  // 編輯 position
-                  do {
-                      newAutoEnter = prompt('請輸入新的 AutoEnter (只能輸入 y 或 n)', item.autoEnter ? 'y' : 'n');
-                  } while (newAutoEnter !== null && newAutoEnter !== 'y' && newAutoEnter !== 'n');
-                  if (newAutoEnter !== null) {
-                      if (newAutoEnter === 'y') {
-                          item.autoEnter = true;
-                      }
-                      else {
-                          item.autoEnter = false;
-                      }
-                  }
-                  // 編輯 content
-                  // const textarea = document.createElement('textarea');
-                  // textarea.value = item.content;
-                  // textarea.style.width = '100%';
-                  // textarea.style.height = '100px';
-                  const newContent = prompt('請輸入新的 content', item.content);
-                  if (newContent !== null) {
-                      item.content = newContent;
-                  }
-                  // 重新渲染表格
-                  renderTable();
+                  createFormPopup({
+                      title: '編輯',
+                      mode: 'edit',
+                      initialValues: {
+                          name: item.name,
+                          position: item.position,
+                          autoEnter: item.autoEnter,
+                          content: item.content,
+                      },
+                      onSubmit: (newValues) => {
+                          item.name = newValues.name;
+                          item.position = newValues.position;
+                          item.autoEnter = newValues.autoEnter;
+                          item.content = newValues.content;
+                          // 重新渲染表格
+                          renderTable();
+                      },
+                  });
               }
               else {
                   alert('輸入的編號不合法');

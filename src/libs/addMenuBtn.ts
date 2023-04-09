@@ -5,7 +5,7 @@ import {
 } from "./buttonCreators";
 import { bindElementContainer } from "../utils/bindElementContainer";
 
-import { config } from "../config";
+import { config } from "../config/config";
 import { Customization } from "../types/index";
 
 
