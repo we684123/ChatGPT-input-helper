@@ -2,7 +2,7 @@
 // @name         ChatGPT-input-helper
 // @name:zh-TW   ChatGPT-input-helper 快速輸入常用咒文
 // @namespace    https://github.com/we684123/ChatGPT-input-helper
-// @version      0.0.7
+// @version      0.0.8
 // @author       we684123
 // @description  Help organize commonly used spells quickly
 // @description:zh-TW  幫助快速組織常用咒文
@@ -290,7 +290,6 @@
       console.log(customize.length);
       if (customize.length > 3) {
           const height = 39;
-          // const height = containerNode.offsetHeight;
           console.log('height');
           console.log(height);
           let offset = Number(customize.length / 2 * height);
@@ -543,7 +542,6 @@
           tableWrapper.classList.add(styles['table-wrapper']);
           tableWrapper.appendChild(table);
           popup.appendChild(tableWrapper);
-          // popup.appendChild(table);
           // 創建表頭
           const thead = document.createElement('thead');
           const tr = document.createElement('tr');
