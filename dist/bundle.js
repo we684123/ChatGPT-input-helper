@@ -143,6 +143,37 @@
       }
   }
 
+  function styleInject(css, ref) {
+    if ( ref === void 0 ) ref = {};
+    var insertAt = ref.insertAt;
+
+    if (!css || typeof document === 'undefined') { return; }
+
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var style = document.createElement('style');
+    style.type = 'text/css';
+
+    if (insertAt === 'top') {
+      if (head.firstChild) {
+        head.insertBefore(style, head.firstChild);
+      } else {
+        head.appendChild(style);
+      }
+    } else {
+      head.appendChild(style);
+    }
+
+    if (style.styleSheet) {
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
+  }
+
+  var css_248z$1 = ".buttonStyles-module_container__l-r9Y{align-items:center;border:1px solid #fff;border-radius:5px;box-sizing:border-box;display:flex;justify-content:center;position:relative;width:100%}.buttonStyles-module_mainButton__b08pW{border:1px solid #fff;border-radius:5px;margin:0 auto;padding:8px 12px;width:85%}.buttonStyles-module_mainButton__b08pW,.buttonStyles-module_settingButton__-opQi{background-color:#202123;box-sizing:border-box;color:#fff;cursor:pointer;font-size:14px}.buttonStyles-module_settingButton__-opQi{border:none;border-radius:5px;padding:8px 14px;width:15%}.buttonStyles-module_menu__aeYDY{background-color:#202123;border:1px solid #fff;border-radius:15px;display:none;left:100px;position:absolute;width:100%;z-index:1}.buttonStyles-module_menuButton__eg9D8{background-color:#202123;border:1px solid #fff;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:14px;height:100%;padding:8px 12px;width:100%}";
+  var styles = {"container":"buttonStyles-module_container__l-r9Y","mainButton":"buttonStyles-module_mainButton__b08pW","settingButton":"buttonStyles-module_settingButton__-opQi","menu":"buttonStyles-module_menu__aeYDY","menuButton":"buttonStyles-module_menuButton__eg9D8"};
+  styleInject(css_248z$1);
+
   // library.ts
   const config = {
       name: "aims-helper",
@@ -190,54 +221,6 @@
       INPUT_EVENT: new Event('input', { bubbles: true }),
   };
 
-  function styleInject(css, ref) {
-    if ( ref === void 0 ) ref = {};
-    var insertAt = ref.insertAt;
-
-    if (!css || typeof document === 'undefined') { return; }
-
-    var head = document.head || document.getElementsByTagName('head')[0];
-    var style = document.createElement('style');
-    style.type = 'text/css';
-
-    if (insertAt === 'top') {
-      if (head.firstChild) {
-        head.insertBefore(style, head.firstChild);
-      } else {
-        head.appendChild(style);
-      }
-    } else {
-      head.appendChild(style);
-    }
-
-    if (style.styleSheet) {
-      style.styleSheet.cssText = css;
-    } else {
-      style.appendChild(document.createTextNode(css));
-    }
-  }
-
-  var css_248z$1 = ".buttonStyles-module_container__l-r9Y{align-items:center;border:1px solid #fff;border-radius:5px;box-sizing:border-box;display:flex;justify-content:center;position:relative;width:100%}.buttonStyles-module_mainButton__b08pW{border:1px solid #fff;border-radius:5px;margin:0 auto;width:85%}.buttonStyles-module_mainButton__b08pW,.buttonStyles-module_settingButton__-opQi{background-color:#525252;box-sizing:border-box;color:#fff;cursor:pointer;font-size:14px;padding:8px 12px}.buttonStyles-module_settingButton__-opQi{border:none;border-radius:5px;width:15%}.buttonStyles-module_menu__aeYDY{background-color:#2b2c2f;border:1px solid #fff;border-radius:15px;display:none;left:100%;position:absolute;top:0;width:100%;z-index:1}.buttonStyles-module_menu__aeYDY button{background-color:#2b2c2f;border:1px solid #fff;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:14px;height:100%;padding:8px 12px;width:100%}";
-  var styles = {"container":"buttonStyles-module_container__l-r9Y","mainButton":"buttonStyles-module_mainButton__b08pW","settingButton":"buttonStyles-module_settingButton__-opQi","menu":"buttonStyles-module_menu__aeYDY"};
-  styleInject(css_248z$1);
-
-  // 創建主按鈕
-  const createMainButton = (buttonText) => {
-      const mainButton = document.createElement("button");
-      mainButton.innerText = buttonText;
-      mainButton.classList.add(styles.mainButton);
-      mainButton.style.width = "85%";
-      return mainButton;
-  };
-  // 創建設定按鈕
-  const createSettingButton = () => {
-      const settingButton = document.createElement("button");
-      settingButton.innerText = "⚙️";
-      settingButton.classList.add(styles.settingButton);
-      settingButton.style.width = "15%";
-      settingButton.id = "settingButton";
-      return settingButton;
-  };
   // 將自定義內容插入到輸入框中
   const insertCustomize = (customize, name) => {
       const textInputbox = document.querySelector(config.TEXT_INPUTBOX_POSITION);
@@ -260,17 +243,36 @@
           console.error(`找不到名稱為 ${name} 的元素`);
       }
   };
-  // 創建選單項目
+
+  // 創建主按鈕
+  const createMainButton = (buttonText) => {
+      const mainButton = document.createElement("button");
+      mainButton.innerText = buttonText;
+      mainButton.classList.add(styles.mainButton);
+      mainButton.style.width = "86%";
+      return mainButton;
+  };
+  // 創建設定按鈕
+  const createSettingButton = () => {
+      const settingButton = document.createElement("button");
+      settingButton.innerText = "⚙️";
+      settingButton.classList.add(styles.settingButton);
+      settingButton.style.width = "14%";
+      settingButton.id = "settingButton";
+      return settingButton;
+  };
+  // 創建選項
   const createMenuItem = (element, customize) => {
       const menuItem = document.createElement("button");
       menuItem.innerText = element.name;
       menuItem.id = element.name;
+      menuItem.classList.add(styles.menuButton);
       menuItem.addEventListener("click", (event) => {
           insertCustomize(customize, event.target.id);
       });
       return menuItem;
   };
-  // 創建選單，包含多個選單項目
+  // 創建選單(包含多個選項)
   const createMenu = (containerNode, customize) => {
       const menu = document.createElement("div");
       menu.id = "helper_menu";
@@ -318,7 +320,9 @@
       containerNode.appendChild(buttonWrapper);
       // 當滑鼠離開按鈕包裹器時，隱藏選單
       buttonWrapper.addEventListener("mouseleave", () => {
-          menu.style.display = "none";
+          setTimeout(() => {
+              menu.style.display = "none";
+          }, 300);
       });
       console.log("已新增按鈕");
   }

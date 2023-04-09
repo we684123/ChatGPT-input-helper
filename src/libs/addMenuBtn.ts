@@ -40,7 +40,9 @@ export function addMenuBtnWrapper(containerNode: HTMLElement,
 
     // 當滑鼠離開按鈕包裹器時，隱藏選單
     buttonWrapper.addEventListener("mouseleave", () => {
-        menu.style.display = "none";
+        setTimeout(() => {
+            menu.style.display = "none";
+        }, 300);
     });
 
     console.log("已新增按鈕");

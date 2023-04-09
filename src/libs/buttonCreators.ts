@@ -7,7 +7,7 @@ export const createMainButton = (buttonText: string): HTMLButtonElement => {
     const mainButton = document.createElement("button");
     mainButton.innerText = buttonText;
     mainButton.classList.add(styles.mainButton);
-    mainButton.style.width = "85%";
+    mainButton.style.width = "86%";
     return mainButton;
 };
 
@@ -16,7 +16,7 @@ export const createSettingButton = (): HTMLButtonElement => {
     const settingButton = document.createElement("button");
     settingButton.innerText = "⚙️";
     settingButton.classList.add(styles.settingButton);
-    settingButton.style.width = "15%";
+    settingButton.style.width = "14%";
     settingButton.id = "settingButton";
     return settingButton;
 };
@@ -28,6 +28,7 @@ const createMenuItem = (element: any, customize: Customization[]) => {
     const menuItem = document.createElement("button");
     menuItem.innerText = element.name;
     menuItem.id = element.name;
+    menuItem.classList.add(styles.menuButton);
     menuItem.addEventListener("click", (event) => {
         insertCustomize(customize, (event.target as HTMLElement).id);
     });

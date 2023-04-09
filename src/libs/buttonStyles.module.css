@@ -15,7 +15,7 @@
   font-size: 14px;
   color: #fff;
   border: 1px solid #fff;
-  background-color: #525252;
+  background-color: #202123;
   border-radius: 5px;
   cursor: pointer;
   width: 85%;
@@ -24,10 +24,10 @@
 }
 
 .settingButton {
-  padding: 8px 12px;
+  padding: 8px 14px;
   font-size: 14px;
   color: #fff;
-  background-color: #525252;
+  background-color: #202123;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -38,23 +38,23 @@
 .menu {
   display: none;
   position: absolute;
-  left: 100%;
-  top: 0;
+  left: 100px;
+  /* top: 0; */
   z-index: 1;
   width: 100%;
-  background-color: #2b2c2f;
+  background-color: #202123;
   border: 1px solid #fff;
   border-radius: 15px;
 }
 
-.menu button {
+.menuButton {
   display: block;
   width: 100%;
   height: 100%;
   padding: 8px 12px;
   font-size: 14px;
   color: #fff;
-  background-color: #2b2c2f;
+  background-color: #202123;
   border: 1px solid #fff;
   border-radius: 5px;
   cursor: pointer;
