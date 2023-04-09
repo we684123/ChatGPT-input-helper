@@ -1,6 +1,6 @@
-import { config } from "../config";
 import { Customization } from "../types/index";
 import styles from "./buttonStyles.module.css";
+import { insertCustomize } from "./insertCustomize";
 
 // 創建主按鈕
 export const createMainButton = (buttonText: string): HTMLButtonElement => {
@@ -22,31 +22,8 @@ export const createSettingButton = (): HTMLButtonElement => {
 };
 
 
-// 將自定義內容插入到輸入框中
-export const insertCustomize = (customize: any, name: string) => {
-    const textInputbox = document.querySelector(config.TEXT_INPUTBOX_POSITION) as HTMLTextAreaElement;
-    const submitButton = document.querySelector(config.SUBMIT_BUTTON_POSITION) as HTMLButtonElement;
-    const item = customize.find((i: any) => i.name === name);
 
-    if (item) {
-        if (item.position === 'start') {
-            textInputbox.value = item.content + textInputbox.value;
-        } else {
-            textInputbox.value += item.content;
-        }
-
-        textInputbox.dispatchEvent(config.INPUT_EVENT);
-        textInputbox.focus();
-
-        if (item.autoEnter) {
-            submitButton.click();
-        }
-    } else {
-        console.error(`找不到名稱為 ${name} 的元素`);
-    }
-};
-
-// 創建選單項目
+// 創建選項
 const createMenuItem = (element: any, customize: Customization[]) => {
     const menuItem = document.createElement("button");
     menuItem.innerText = element.name;
@@ -58,7 +35,7 @@ const createMenuItem = (element: any, customize: Customization[]) => {
     return menuItem;
 };
 
-// 創建選單，包含多個選單項目
+// 創建選單(包含多個選項)
 export const createMenu = (containerNode: any, customize: Customization[]) => {
     const menu = document.createElement("div");
     menu.id = "helper_menu";
