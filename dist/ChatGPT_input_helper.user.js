@@ -2,7 +2,7 @@
 // @name         ChatGPT-input-helper
 // @name:zh-TW   ChatGPT-input-helper 快速輸入常用咒文
 // @namespace    https://github.com/we684123/ChatGPT-input-helper
-// @version      0.0.9
+// @version      0.0.10
 // @author       we684123
 // @description  Help organize commonly used spells quickly
 // @description:zh-TW  幫助快速組織常用咒文
@@ -250,7 +250,7 @@
       }
   };
 
-  // 創建主按鈕
+  // 創造主按鈕
   const createMainButton = (buttonText) => {
       const mainButton = document.createElement("button");
       mainButton.innerText = buttonText;
@@ -258,7 +258,7 @@
       mainButton.style.width = "86%";
       return mainButton;
   };
-  // 創建設定按鈕
+  // 創造設定按鈕
   const createSettingButton = () => {
       const settingButton = document.createElement("button");
       settingButton.innerText = "⚙️";
@@ -267,7 +267,7 @@
       settingButton.id = "settingButton";
       return settingButton;
   };
-  // 創建選項
+  // 創造選項
   const createMenuItem = (element, customize) => {
       const menuItem = document.createElement("button");
       menuItem.innerText = element.name;
@@ -278,32 +278,36 @@
       });
       return menuItem;
   };
-  // 創建選單(包含多個選項)
+  // 創造選單(包含多個選項)
   const createMenu = (containerNode, customize) => {
+      // 創造選單
       const menu = document.createElement("div");
       menu.id = "helper_menu";
       menu.classList.add(styles$2.menu);
       menu.style.display = "none";
       menu.style.width = `${containerNode.offsetWidth}px`;
+      // 創造選項
       customize.forEach((element) => {
           const menuItem = createMenuItem(element, customize);
           menu.appendChild(menuItem);
       });
-      console.log('customize.length');
-      console.log(customize.length);
-      if (customize.length > 3) {
-          const height = 39;
-          console.log('height');
-          console.log(height);
-          let offset = Number(customize.length / 2 * height);
-          console.log('offset');
-          console.log(offset);
+      // 設定選單的高度
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      // const menuHeight: number = menu.offsetHeight;
+      const customizeUnitHeight = 39;
+      const menuMaxHeight = windowHeight - customizeUnitHeight * 2;
+      const MaxCustomizeLen = Number(menuMaxHeight / customizeUnitHeight);
+      let customizeLen = customize.length > MaxCustomizeLen ? MaxCustomizeLen : customize.length;
+      console.log(`customize.length = ${customize.length}`);
+      console.log(`CutomizeLen = ${customizeLen}`);
+      console.log(`menuMaxHeight = ${menuMaxHeight}`);
+      if (customizeLen > 2) {
+          let offset = (customizeLen - 2) * customizeUnitHeight;
           menu.style.top = `-${offset}px`;
-          console.log('menu.style.top');
-          menu.style.maxHeight = `${height * 7 * 2}px`;
-          // 7 是左邊nav由下到上的選項數量
-          // 2 因為有被對切
+          console.log(`offset = ${offset}`);
       }
+      // 設定選單最大高度
+      menu.style.maxHeight = `${menuMaxHeight}px`;
       return menu;
   };
 
