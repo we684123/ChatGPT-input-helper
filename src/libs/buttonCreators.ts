@@ -55,7 +55,6 @@ export const createMenu = (containerNode: any, customize: Customization[]) => {
 
     // 設定選單的高度
     const windowHeight: number = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    // const menuHeight: number = menu.offsetHeight;
     const customizeUnitHeight: number = 39;
     const menuMaxHeight: number = windowHeight - customizeUnitHeight * 2;
     const MaxCustomizeLen = Number(menuMaxHeight / customizeUnitHeight);
@@ -63,7 +62,7 @@ export const createMenu = (containerNode: any, customize: Customization[]) => {
 
 
     console.log(`customize.length = ${customize.length}`);
-    console.log(`CutomizeLen = ${customizeLen}`);
+    console.log(`CustomizeLen = ${customizeLen}`);
     console.log(`menuMaxHeight = ${menuMaxHeight}`);
     if (customizeLen > 2) {
         let offset: number = (customizeLen - 2) * customizeUnitHeight
