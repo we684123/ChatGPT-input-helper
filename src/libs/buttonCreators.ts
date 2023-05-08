@@ -43,7 +43,7 @@ export const createMenu = (containerNode: any, customize: Customization[]) => {
     menu.id = "helper_menu";
     menu.classList.add(styles.menu);
     menu.style.display = "none";
-    menu.style.width = `${containerNode.offsetWidth}px`;
+    menu.style.width = `${containerNode.offsetWidth / 100 * 86}px`;
 
     // 創造選項
     customize.forEach((element: any) => {

@@ -2,7 +2,7 @@
 // @name         ChatGPT-input-helper
 // @name:zh-TW   ChatGPT-input-helper 快速輸入常用咒文
 // @namespace    https://github.com/we684123/ChatGPT-input-helper
-// @version      0.0.11
+// @version      0.0.12
 // @author       we684123
 // @description  Help organize commonly used spells quickly
 // @description:zh-TW  幫助快速組織常用咒文
@@ -174,7 +174,7 @@
     }
   }
 
-  var css_248z$2 = ".buttonStyles-module_container__l-r9Y{align-items:center;border:1px solid #fff;border-radius:5px;box-sizing:border-box;display:flex;justify-content:center;position:relative;width:100%}.buttonStyles-module_mainButton__b08pW{border:1px solid #fff;border-radius:5px;margin:0 auto;padding:8px 12px;width:85%}.buttonStyles-module_mainButton__b08pW,.buttonStyles-module_settingButton__-opQi{background-color:#202123;box-sizing:border-box;color:#fff;cursor:pointer;font-size:14px}.buttonStyles-module_settingButton__-opQi{border:none;border-radius:5px;padding:8px 14px;width:15%}.buttonStyles-module_menu__aeYDY{background-color:#202123;border:1px solid #fff;border-radius:15px;display:none;left:0;max-height:240px;overflow-y:auto;position:absolute;top:0;width:100%;z-index:9999}.buttonStyles-module_menuButton__eg9D8{background-color:#202123;border:1px solid #fff;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:14px;height:100%;padding:8px 12px;width:100%}.buttonStyles-module_containerNode_class__1rDgQ{position:relative}";
+  var css_248z$2 = ".buttonStyles-module_container__l-r9Y{align-items:center;border:1px solid #fff;border-radius:5px;box-sizing:border-box;display:flex;justify-content:center;position:relative;width:100%}.buttonStyles-module_mainButton__b08pW{border:1px solid #fff;border-radius:5px;margin:0 auto;padding:8px 12px;width:85%}.buttonStyles-module_mainButton__b08pW,.buttonStyles-module_settingButton__-opQi{background-color:#202123;box-sizing:border-box;color:#fff;cursor:pointer;font-size:14px}.buttonStyles-module_settingButton__-opQi{border:none;border-radius:5px;padding:8px 14px;width:15%}.buttonStyles-module_menu__aeYDY{background-color:#202123;border:1px solid #fff;border-radius:15px;display:none;left:14%;max-height:240px;overflow-y:auto;position:absolute;top:0;width:100%;z-index:9999}.buttonStyles-module_menuButton__eg9D8{background-color:#202123;border:1px solid #fff;border-radius:5px;color:#fff;cursor:pointer;display:block;font-size:14px;height:100%;padding:8px 12px;width:100%}.buttonStyles-module_containerNode_class__1rDgQ{position:relative}";
   var styles$2 = {"container":"buttonStyles-module_container__l-r9Y","mainButton":"buttonStyles-module_mainButton__b08pW","settingButton":"buttonStyles-module_settingButton__-opQi","menu":"buttonStyles-module_menu__aeYDY","menuButton":"buttonStyles-module_menuButton__eg9D8","containerNode_class":"buttonStyles-module_containerNode_class__1rDgQ"};
   styleInject(css_248z$2);
 
@@ -285,7 +285,7 @@
       menu.id = "helper_menu";
       menu.classList.add(styles$2.menu);
       menu.style.display = "none";
-      menu.style.width = `${containerNode.offsetWidth}px`;
+      menu.style.width = `${containerNode.offsetWidth / 100 * 86}px`;
       // 創造選項
       customize.forEach((element) => {
           const menuItem = createMenuItem(element, customize);
