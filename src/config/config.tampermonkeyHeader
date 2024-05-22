@@ -14,6 +14,8 @@
 // @match        https://chat.openai.com/?model=*
 // @match        https://chat.openai.com/c/*
 // @match        https://chat.openai.com/
+// @match        https://chatgpt.com/c/*
+// @match        https://chatgpt.com/
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_deleteValue
