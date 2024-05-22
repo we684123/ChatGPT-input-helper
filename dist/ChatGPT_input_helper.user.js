@@ -2,7 +2,7 @@
 // @name         ChatGPT-input-helper
 // @name:zh-TW   ChatGPT-input-helper 快速輸入常用咒文
 // @namespace    https://github.com/we684123/ChatGPT-input-helper
-// @version      0.0.12
+// @version      0.0.13
 // @author       we684123
 // @description  Help organize commonly used spells quickly
 // @description:zh-TW  幫助快速組織常用咒文
@@ -14,6 +14,8 @@
 // @match        https://chat.openai.com/?model=*
 // @match        https://chat.openai.com/c/*
 // @match        https://chat.openai.com/
+// @match        https://chatgpt.com/c/*
+// @match        https://chatgpt.com/
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_deleteValue
